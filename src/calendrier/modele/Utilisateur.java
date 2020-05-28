@@ -10,5 +10,7 @@ package calendrier.modele;
  * @author alexi
  */
 public class Utilisateur {
-    
+    public Utilisateur() {
+        
+    }
 }
