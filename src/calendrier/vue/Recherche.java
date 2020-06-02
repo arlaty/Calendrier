@@ -8,6 +8,7 @@ package calendrier.vue;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridLayout;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
@@ -41,6 +42,8 @@ public class Recherche extends JPanel{
     private JComboBox recherche_utilisateur = new JComboBox();
     private JLabel utilisateur = new JLabel("   Utilisateur");
     
+    private JComboBox recherche_année = new JComboBox();
+    private JLabel année = new JLabel("Année");
     private JComboBox recherche_semaine = new JComboBox();
     private JLabel semaine = new JLabel("Semaine");
     
@@ -55,9 +58,8 @@ public class Recherche extends JPanel{
         
 
         setBackground(Color.white);
-        setLayout(new BorderLayout());
+        setLayout(new GridLayout(2, 1));
 
-        Font police = new Font("Arial", Font.BOLD, 14);
 
         //boucle pour entrer les cours depuis la bdd etc
         recherche_cours.addItem("ALL");
@@ -66,6 +68,7 @@ public class Recherche extends JPanel{
         recherche_promo.addItem("ALL");
         recherche_groupe.addItem("ALL");
         recherche_utilisateur.addItem("ALL");
+        recherche_année.addItem("ALL");
         recherche_semaine.addItem("ALL");
 
         etudiants.setSelected(true);
@@ -87,6 +90,8 @@ public class Recherche extends JPanel{
         pan.add(etudiants);
         pan.add(utilisateur);
         pan.add(recherche_utilisateur);
+        pan_bis.add(année);
+        pan_bis.add(recherche_année);
         pan_bis.add(semaine);
         pan_bis.add(recherche_semaine);
 

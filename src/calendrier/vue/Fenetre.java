@@ -124,7 +124,7 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener{
         BoxLayout    bl=new BoxLayout(pan,BoxLayout.Y_AXIS);   //layoutManager
         pan.setLayout(bl);                      //attache le layoutManager au panel           
 
-        JLabel  lab=new JLabel("Planning 2019-2020  -Nom Prénom (type d'utilisateur)");  //créé un label
+        JLabel  lab=new JLabel("Planning 2019-2020  -Nom Prénom (type d'utilisateur)", JLabel.RIGHT);  //créé un label
         lab.setForeground(Color.white);
         
         pan.add(lab); //l'ajoute au panel
@@ -277,14 +277,14 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener{
             case 0: //affichage page EDT
                 recherche_form = new Recherche();
                 edt_content = new EDT();
-                this.add(recherche_form);
+                this.add("North", recherche_form);
                 this.add(edt_content);
                 
                 break;
             case 1: //affichage page recap cours
                 recherche_form = new Recherche();
                 recap_content = new Récap();
-                this.add(recherche_form);
+                this.add("North", recherche_form);
                 this.add(recap_content);
                 break;
             case 2: //affichage page ajout séance

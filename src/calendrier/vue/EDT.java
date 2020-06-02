@@ -9,6 +9,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
@@ -28,10 +29,25 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author lizziedelaisser
  */
-public class EDT extends JTabbedPane{
+public class EDT extends JPanel{
    
+    JPanel plus1, plus2, plus3, plus4, plus5;
+    
     public EDT(){
         System.out.println("Page EDT");
+        //new GridLayout( nbligne, nbcolonne) --> nb ligne en fonction du nombre de jour où il y a cours au max 5 par semaine
+        this.setLayout(new GridLayout(5,2));
+        
+        plus1 = new JPanel();
+        plus2 = new JPanel();
+        plus3 = new JPanel();
+        plus4 = new JPanel();
+        plus5 = new JPanel();
+        plus1.setBackground(Color.MAGENTA);
+        plus2.setBackground(Color.MAGENTA);
+        plus3.setBackground(Color.MAGENTA);
+        plus4.setBackground(Color.MAGENTA);
+        plus5.setBackground(Color.MAGENTA);
         
         //Les données du tableau qui seront à chercher depuis la BDD
         Object[][] data = {
@@ -42,7 +58,11 @@ public class EDT extends JTabbedPane{
 
         //Les titres des colonnes
         String  title[] = {"Jour XX/XX/XXXX", " ", " ", " ", " ", " "};
-        JTable tableau = new JTable(data, title);
+        JTable tableau1 = new JTable(data, title);
+        JTable tableau2 = new JTable(data, title);
+        JTable tableau3 = new JTable(data, title);
+        JTable tableau4 = new JTable(data, title);
+        JTable tableau5 = new JTable(data, title);
         //instance table model
         DefaultTableModel tableModel = new DefaultTableModel(data, title) {
 
@@ -52,10 +72,23 @@ public class EDT extends JTabbedPane{
                return false;
             }
         };
-        tableau.setModel(tableModel);
+        tableau1.setModel(tableModel);
+        tableau2.setModel(tableModel);
+        tableau3.setModel(tableModel);
+        tableau4.setModel(tableModel);
+        tableau5.setModel(tableModel);
         //Nous ajoutons notre tableau à notre contentPane dans un scroll
         //Sinon les titres des colonnes ne s'afficheront pas !
-        this.add(new JScrollPane(tableau));
+        this.add(new JScrollPane(tableau1));
+        this.add(plus1);
+        this.add(new JScrollPane(tableau2));
+        this.add(plus2);
+        this.add(new JScrollPane(tableau3));
+        this.add(plus3);
+        this.add(new JScrollPane(tableau4));
+        this.add(plus4);
+        this.add(new JScrollPane(tableau5));
+        this.add(plus5);
     }
   
 }
