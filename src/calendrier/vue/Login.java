@@ -32,7 +32,10 @@ public class Login extends JFrame implements ActionListener {
      * 
      */
    public Login() {
+       
       super("Connexion au compte");
+      
+      System.out.println("Page Login");
       this.setPreferredSize(new Dimension(300, 200));
       //this.setLocationRelativeTo(null);
       this.gestionDisposition();

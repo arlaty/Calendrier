@@ -20,9 +20,8 @@ import javax.swing.JRadioButton;
  *
  * @author lizziedelaisser
  */
-public class Recherche {
+public class Recherche extends JPanel{
     
-    private JPanel container = new JPanel();
     private JPanel pan = new JPanel();
     private JPanel pan_bis = new JPanel();
    
@@ -36,40 +35,38 @@ public class Recherche {
     private JLabel groupe = new JLabel("Groupe");
     
     private ButtonGroup type_utilisateur = new ButtonGroup();
-    private JRadioButton etudiants = new JRadioButton("Etudiants");
+    private JRadioButton etudiants = new JRadioButton("     Etudiants");
     private JRadioButton enseignants = new JRadioButton("Enseignants");
     
     private JComboBox recherche_utilisateur = new JComboBox();
-    private JLabel utilisateur = new JLabel("Utilisateur");
+    private JLabel utilisateur = new JLabel("   Utilisateur");
     
     private JComboBox recherche_semaine = new JComboBox();
     private JLabel semaine = new JLabel("Semaine");
     
     
     /**
-     * Constructeur du "menu" ou "form" de recherche et qui prend en paramètre la page à configurer
+     * Constructeur du "menu" ou "form" de recherche et qui return le panel de recherche
      *  
-     *
-     * @param frame
+     * 
      */
-    public Recherche(JFrame frame){
-        frame.setLocationRelativeTo(null);
-        container.setBackground(Color.white);
-        container.setLayout(new BorderLayout());
+    public Recherche(){
+        System.out.println("Page Recherche");
+        
 
-        container.setBackground(Color.white);
-        container.setLayout(new BorderLayout());
+        setBackground(Color.white);
+        setLayout(new BorderLayout());
 
         Font police = new Font("Arial", Font.BOLD, 14);
 
         //boucle pour entrer les cours depuis la bdd etc
+        recherche_cours.addItem("ALL");
         recherche_cours.addItem("1");
-        recherche_cours.addItem("2");
 
-        recherche_promo.addItem("1");
-        recherche_groupe.addItem("1");
-        recherche_utilisateur.addItem("1");
-        recherche_semaine.addItem("1");
+        recherche_promo.addItem("ALL");
+        recherche_groupe.addItem("ALL");
+        recherche_utilisateur.addItem("ALL");
+        recherche_semaine.addItem("ALL");
 
         etudiants.setSelected(true);
         //etudiants.addActionListener(new StateListener());
@@ -93,12 +90,9 @@ public class Recherche {
         pan_bis.add(semaine);
         pan_bis.add(recherche_semaine);
 
-        container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
-        container.add(pan);
-        container.add(pan_bis);
-
-        frame.add(container);
-        frame.setVisible(true); 
+        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        add(pan);
+        add(pan_bis);
     }
   
 }

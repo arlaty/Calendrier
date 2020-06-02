@@ -24,58 +24,66 @@ import javax.swing.JPanel;
  *
  * @author lizziedelaisser
  */
-public class Formulaire {
+public class Formulaire extends JPanel{
    
-    private JPanel container = new JPanel();
+    private JPanel pan_espacement = new JPanel();
+        private JLabel espacement = new JLabel(" ");
+        
+    private JPanel pan_titre = new JPanel();
+        private JLabel titre = new JLabel("Formulaire d'ajout d'une séance");
+        
+    private JPanel pan_date = new JPanel();
+        private JLabel date = new JLabel("Date : ", JLabel.RIGHT);
+        private JComboBox saisie_année = new JComboBox();
+        private JLabel année = new JLabel("Année", JLabel.RIGHT);
+        private JComboBox saisie_mois = new JComboBox();
+        private JLabel mois = new JLabel("Mois", JLabel.RIGHT);
+        private JComboBox saisie_jour = new JComboBox();
+        private JLabel jour = new JLabel("jour", JLabel.RIGHT);
     
-    /*private JTextField jtf = new JTextField("Valeur par défaut");
-    private JLabel label1 = new JLabel("Un JTextField");*/
+    private JPanel pan_horaires = new JPanel();
+        private JLabel horaires = new JLabel("Horaires : ", JLabel.RIGHT);
+        private JComboBox saisie_heure_début = new JComboBox();
+        private JLabel heure_début = new JLabel("Heure début", JLabel.RIGHT);
+        private JComboBox saisie_heure_fin = new JComboBox();
+        private JLabel heure_fin = new JLabel("Heure Fébut", JLabel.RIGHT);
     
-    private JLabel date = new JLabel("Date : ", JLabel.RIGHT);
-    private JComboBox saisie_année = new JComboBox();
-    private JLabel année = new JLabel("Année", JLabel.RIGHT);
-    private JComboBox saisie_mois = new JComboBox();
-    private JLabel mois = new JLabel("Mois", JLabel.RIGHT);
-    private JComboBox saisie_jour = new JComboBox();
-    private JLabel jour = new JLabel("jour", JLabel.RIGHT);
-    
-    private JLabel horaires = new JLabel("Horaires : ", JLabel.RIGHT);
-    private JComboBox saisie_heure_début = new JComboBox();
-    private JLabel heure_début = new JLabel("Heure début", JLabel.RIGHT);
-    private JComboBox saisie_heure_fin = new JComboBox();
-    private JLabel heure_fin = new JLabel("Heure Fébut", JLabel.RIGHT);
-    
-    private JComboBox saisie_état = new JComboBox();
-    private JLabel état = new JLabel("Etat", JLabel.RIGHT);
+    private JPanel pan_état = new JPanel();
+        private JComboBox saisie_état = new JComboBox();
+        private JLabel état = new JLabel("Etat", JLabel.RIGHT);
    
-    private JComboBox saisie_cours = new JComboBox();
-    private JLabel cours = new JLabel("Cours");
-    private JComboBox saisie_type_cours = new JComboBox();
-    private JLabel type_cours = new JLabel("Type de cours");
+    private JPanel pan_cours = new JPanel();
+        private JComboBox saisie_cours = new JComboBox();
+        private JLabel cours = new JLabel("Cours");
+        private JComboBox saisie_type_cours = new JComboBox();
+        private JLabel type_cours = new JLabel("Type de cours");
     
-    private JComboBox saisie_promo = new JComboBox();
-    private JLabel promo = new JLabel("Promo");
+    private JPanel pan_groupe= new JPanel();
+        private JComboBox saisie_promo = new JComboBox();
+        private JLabel promo = new JLabel("Promo");
+        //chargé suivant les groupes existants
+        //private ArrayList <JCheckBox> list_groupe;
+        private JCheckBox groupe1 = new JCheckBox("TD1");
+        private JCheckBox groupe2 = new JCheckBox("TD2");
     
-    //chargé suivant les groupes existants
-    //private ArrayList <JCheckBox> list_groupe;
-    private JCheckBox groupe1 = new JCheckBox("TD1");
-    private JCheckBox groupe2 = new JCheckBox("TD2");
+    private JPanel pan_enseignant= new JPanel();
+        //chargé suivant les enseignants qui s'occupent du cours sélectionnés plus haut
+        //private ArrayList <JCheckBox> list_enseignant;
+        private JCheckBox enseignant1 = new JCheckBox("Enseignant1");
+        private JCheckBox enseignant2 = new JCheckBox("Enseignant2");
+        private JLabel enseignants = new JLabel("Enseignant(s) ");
     
-    //chargé suivant les enseignants qui s'occupent du cours sélectionnés plus haut
-    //private ArrayList <JCheckBox> list_enseignant;
-    private JCheckBox enseignant1 = new JCheckBox("Enseignant1");
-    private JCheckBox enseignant2 = new JCheckBox("Enseignant2");
-    private JLabel enseignants = new JLabel("Enseignant(s) ");
+    private JPanel pan_site = new JPanel();
+        private JComboBox saisie_site = new JComboBox();
+        private JLabel site = new JLabel("Site");
+        //chargé suivant le site sélectionné
+        //private ArrayList <JCheckBox> list_salles;
+        private JCheckBox salle1 = new JCheckBox("Salle1");
+        private JCheckBox salle2 = new JCheckBox("Salle2");
+        private JCheckBox salle3 = new JCheckBox("Salle3");
     
-    private JComboBox saisie_site = new JComboBox();
-    private JLabel site = new JLabel("Site");
-    //chargé suivant le site sélectionné
-    //private ArrayList <JCheckBox> list_salles;
-    private JCheckBox salle1 = new JCheckBox("Salle1");
-    private JCheckBox salle2 = new JCheckBox("Salle2");
-    private JCheckBox salle3 = new JCheckBox("Salle3");
-    
-    private JButton btn_ajouter = new JButton("Ajouter");
+    private JPanel pan_btn = new JPanel();
+        private JButton btn_ajouter = new JButton("Ajouter");
     
     /**
      * Constrcuteur du content formulaire, qui prend en paramètre une fen^re de type JFrame
@@ -83,19 +91,20 @@ public class Formulaire {
      *  
      *
      * 
-     * @param frame
      * @return 
      */
-    public JPanel Formulaire(){
-        container.setBackground(Color.white);
-        container.setLayout(new BorderLayout());
-
-        container.setBackground(Color.white);
-        container.setLayout(new BorderLayout());
-
+    public  Formulaire(){
         
-        JPanel pan_date = new JPanel();
+        System.out.println("Page formulaire");
+        //setBackground(Color.white);
+        setLayout(new BorderLayout());
+
         Font police = new Font("Arial", Font.BOLD, 14);
+        pan_espacement.setLayout(new BoxLayout(pan_espacement, BoxLayout.LINE_AXIS));
+        pan_espacement.add(espacement);
+        pan_titre.setLayout(new BoxLayout(pan_titre, BoxLayout.LINE_AXIS));
+        pan_titre.add(titre);
+        
         année.setLabelFor(saisie_année);
         mois.setLabelFor(saisie_mois);
         jour.setLabelFor(saisie_jour);
@@ -115,7 +124,7 @@ public class Formulaire {
         pan_date.add(jour);
         pan_date.add(saisie_jour);
    
-        JPanel pan_horaires = new JPanel();
+        
         heure_début.setLabelFor(saisie_heure_début);
         heure_fin.setLabelFor(saisie_heure_fin);
         saisie_heure_début.addItem("8h30");
@@ -127,7 +136,7 @@ public class Formulaire {
         pan_horaires.add(heure_fin);
         pan_horaires.add(saisie_heure_fin);
     
-        JPanel pan_état = new JPanel();
+        
         état.setLabelFor(saisie_état);
         saisie_état.addItem("Validé");
         saisie_état.addItem("En cours de Validation");
@@ -135,8 +144,7 @@ public class Formulaire {
         pan_état.setLayout(new BoxLayout(pan_état, BoxLayout.LINE_AXIS));
         pan_état.add(état);
         pan_état.add(saisie_état);
-        
-        JPanel pan_cours = new JPanel();   
+           
         //à remplir
         saisie_cours.addItem("Mathématiques");
         saisie_cours.addItem("Java POO");
@@ -148,8 +156,8 @@ public class Formulaire {
         pan_cours.add(saisie_cours);
         pan_cours.add(type_cours);
         pan_cours.add(saisie_type_cours);
-
-        JPanel pan_groupe= new JPanel();    
+        
+           
         saisie_promo.addItem("ING1");
         saisie_promo.addItem("ING2"); 
         pan_groupe.setLayout(new BoxLayout(pan_groupe, BoxLayout.LINE_AXIS));
@@ -158,13 +166,13 @@ public class Formulaire {
         pan_groupe.add(groupe1);
         pan_groupe.add(groupe2);
 
-        JPanel pan_enseignant= new JPanel();
+        
         pan_enseignant.setLayout(new BoxLayout(pan_enseignant, BoxLayout.LINE_AXIS));
         pan_enseignant.add(enseignants);
         pan_enseignant.add(enseignant1);
         pan_enseignant.add(enseignant2);
 
-        JPanel pan_site = new JPanel();
+        
         saisie_site.addItem("E1");
         saisie_site.addItem("E2");
         saisie_site.addItem("E3"); 
@@ -175,7 +183,7 @@ public class Formulaire {
         pan_site.add(salle2);
         pan_site.add(salle3);
         
-        JPanel pan_btn = new JPanel();
+        
         pan_btn.add(btn_ajouter);
         
         btn_ajouter.addActionListener((ActionEvent arg0) -> { 
@@ -201,17 +209,17 @@ public class Formulaire {
             }
         });*/
         
-        container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
-        container.add(pan_date);
-        container.add(pan_horaires);
-        container.add(pan_état);
-        container.add(pan_cours);
-        container.add(pan_groupe);
-        container.add(pan_enseignant);
-        container.add(pan_site);
-        container.add(pan_btn);
-        
-        return container;
+        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        this.add(pan_espacement);
+        this.add(pan_titre);
+        this.add(pan_date);
+        this.add(pan_horaires);
+        this.add(pan_état);
+        this.add(pan_cours);
+        this.add(pan_groupe);
+        this.add(pan_enseignant);
+        this.add(pan_site);
+        this.add(pan_btn);
     }
    
     /**

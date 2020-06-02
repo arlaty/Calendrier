@@ -7,6 +7,7 @@ package calendrier.vue;
 
 import calendrier.controleur.Connexion;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -24,6 +25,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -32,10 +34,14 @@ import javax.swing.JTable;
 public class Fenetre extends JFrame implements ActionListener, ItemListener{
     private Connexion maconnexion;
     private JMenuBar navigation;
+         private JMenu cours, reporting, salles, logout;
+            private JMenuItem edt, recap, ajout, liste_salles;
+         private JButton deco, reporting_chart;
     private Formulaire ajout_seance;
     private EDT edt_content;
     private Récap recap_content;
     private Recherche recherche_form;
+    private Reporting reporting_content;
     //private Nav navigation;
     
     
@@ -89,21 +95,20 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener{
      * @param page
      */
     public void ouverture (Login page){
-        System.out.println("av");
         while (page.OK==false) {
-            //this.setVisible(false);
+            this.setVisible(false);
             //attention il faut mettre au moins une ligne de code pour que la boucle soit valide
-            System.out.println("1");
+            //System.out.println("1");
             //tant que le login n'est pas valider on affiche pas la fenêtre
         }
-         System.out.println("ap");
          
-         
-        //ajout de la barre d'infos et du menu principal
         barre();
+        recherche_form = new Recherche();
+        edt_content = new EDT();
+        this.add(recherche_form);
+        this.add(edt_content);
         this.pack();
         this.setVisible(true);
-    
     }
     
     /**
@@ -115,15 +120,19 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener{
        
         JPanel pan=new JPanel();            //panel
         
+        pan.setBackground(new Color(113, 171, 219));
         BoxLayout    bl=new BoxLayout(pan,BoxLayout.Y_AXIS);   //layoutManager
         pan.setLayout(bl);                      //attache le layoutManager au panel           
 
         JLabel  lab=new JLabel("Planning 2019-2020  -Nom Prénom (type d'utilisateur)");  //créé un label
-        pan.add(lab);           //l'ajoute au panel
+        lab.setForeground(Color.white);
+        
+        pan.add(lab); //l'ajoute au panel
+        
         
         //configuration du menu selon le droit de l'utilisateur connecté
         Nav(1);
-        pan.add(navigation, BorderLayout.SOUTH);    
+        setJMenuBar(navigation);
         
         this.setContentPane(pan);
     }
@@ -134,6 +143,7 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener{
      *
      */
     public void affichageSalles(){
+        System.out.println("Page Salles IN");
         //Les données du tableau qui seront à chercher depuis la BDD
         Object[][] data = {
             {"E1", "EM009"},
@@ -142,11 +152,22 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener{
         };
 
         //Les titres des colonnes
-        String  title[] = {"Site", "Salle"};
+        Object  title[] = {"Site", "Salle"};
         JTable tableau = new JTable(data, title);
+        //instance table model
+        DefaultTableModel tableModel = new DefaultTableModel(data, title) {
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+               //all cells false
+               return false;
+            }
+        };
+        tableau.setModel(tableModel);
         //Nous ajoutons notre tableau à notre contentPane dans un scroll
         //Sinon les titres des colonnes ne s'afficheront pas !
-        this.getContentPane().add(new JScrollPane(tableau));
+        this.add(new JScrollPane(tableau));
+        System.out.println("Page Salles OUT");
 
     }
     
@@ -157,10 +178,9 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener{
      * @param droit
      */
     public void Nav(int droit){
-        JMenu cours, reporting, salles, logout;
-        JMenuItem edt, recap, ajout;
-        JButton deco;
-    
+       
+        navigation = new JMenuBar();
+        
         cours = new JMenu("Cours");
         reporting = new JMenu("Reporting");
         salles = new JMenu("Salles");
@@ -169,65 +189,21 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener{
         edt = new JMenuItem("Emploi du temps");
         recap = new JMenuItem("Récapitulatif des cours");
         ajout = new JMenuItem("Ajouter une séance");
-        deco= new JButton(new ImageIcon("icon/test.png"));
+        reporting_chart = new JButton(new ImageIcon("icon/reporting.png"));
+        liste_salles = new JMenuItem("Liste des salles");
+        deco= new JButton(new ImageIcon("icon/deco.png"));
 
         //On initialise nos menus
         cours.add(edt);  
+        
         cours.add(recap);
         if(droit==1) //seul l'admin a accès à l'ajout d'une séance
             cours.add(ajout);
 
+        reporting.add(reporting_chart);
+        salles.add(liste_salles);
         logout.add(deco);
-
-        edt.addActionListener(new ActionListener () {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                //affichage de l'edt
-                recherche_form = new Recherche(this);
-                edt_content = new EDT();
-            }
-        });
         
-        recap.addActionListener(new ActionListener () {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                //affichage du récapitulatif des cours
-                recherche_form = new Recherche(this);
-                recap_content = new Récap();
-            }
-        });
-        
-        ajout.addActionListener(new ActionListener () {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                //affichage du formulaire d'ajout d'une séance
-                ajout_seance = new Formulaire();
-            }
-        });
-        
-        reporting.addActionListener(new ActionListener () {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                //affichage du reporting
-            }
-        });
-        
-        salles.addActionListener(new ActionListener () {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                //affichage des salles
-                affichageSalles();
-        
-            }
-        });
-        
-        deco.addActionListener(new ActionListener () {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                System.exit(0);
-            }
-        });
-
         //L'ordre d'ajout va déterminer l'ordre d'apparition dans le menu de gauche à droite
         //Le premier ajouté sera tout à gauche de la barre de menu et inversement pour le dernier
         navigation.add(cours);
@@ -237,7 +213,97 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener{
 
         navigation.add(Box.createHorizontalGlue());
         navigation.add(logout);
+
+        edt.addActionListener(new ActionListener () {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                //affichage de l'edt
+                actualiser(0);
+            }
+        });
+        
+        recap.addActionListener(new ActionListener () {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                //affichage du récapitulatif des cours
+                actualiser(1);
+            }
+        });
+        
+        ajout.addActionListener(new ActionListener () {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                //affichage du formulaire d'ajout d'une séance
+                actualiser(2);
+            }
+        });
+        
+        reporting_chart.addActionListener(new ActionListener () {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                //affichage du reporting
+                actualiser(3);
+            }
+        });
+        
+        liste_salles.addActionListener(new ActionListener () {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                //affichage des salles
+                actualiser(4);
+            }
+        });
+        
+        deco.addActionListener(new ActionListener () {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                System.out.println("Demande de sortie");
+                System.exit(0);
+            }
+        });
+    }
     
+    /**
+     * fonction qui actualise la fenêtre dès qu'on clique sur un onglet du menu
+     * et qui prend en paramètre l'index de l'onglet 
+     *  
+     *
+     * @param content
+     */
+    public void actualiser(int content){
+        
+        barre();
+        switch(content){
+            case 0: //affichage page EDT
+                recherche_form = new Recherche();
+                edt_content = new EDT();
+                this.add(recherche_form);
+                this.add(edt_content);
+                
+                break;
+            case 1: //affichage page recap cours
+                recherche_form = new Recherche();
+                recap_content = new Récap();
+                this.add(recherche_form);
+                this.add(recap_content);
+                break;
+            case 2: //affichage page ajout séance
+                ajout_seance = new Formulaire();
+                this.add(ajout_seance);
+                break;   
+            case 3: //affichage page reporting
+                System.out.println("Demande reporting");
+                reporting_content = new Reporting();
+                this.add(reporting);
+                break;
+            case 4: //affichage page salles
+                System.out.println("Demande affichage salles");
+                affichageSalles();
+                break;
+        }
+        
+        this.pack();
+        this.setVisible(true);
     }
 
 }
