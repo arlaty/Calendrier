@@ -6,7 +6,6 @@
 package calendrier.controleur;
 
 import calendrier.vue.Fenetre;
-import calendrier.vue.menu;
 
 /**
  *
@@ -18,9 +17,7 @@ public class Controler {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-         //Fenetre f = new Fenetre();
-         int test=1;
-        menu Fen1 = new menu(test);
+         Fenetre f = new Fenetre();
     }
     
 }
