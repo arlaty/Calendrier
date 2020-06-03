@@ -27,8 +27,12 @@ public class Récap extends JTabbedPane{
     private JFrame details_page;
     private Zoom zoom_page;
     
+    /**
+     * Constructeur qui instancie l'objet Récap qui correspond au content du récapitulatif des cours.
+     *  
+     *
+     */
     public Récap(){
-        System.out.println("Page EDT");
         //new GridLayout( nbligne, nbcolonne) --> nb ligne en fonction du nombre de jour où il y a cours au max 5 par semaine
         this.setLayout(new GridLayout(2,1));
         
@@ -55,7 +59,6 @@ public class Récap extends JTabbedPane{
             }
  
 	});	
-        
         
     }
     

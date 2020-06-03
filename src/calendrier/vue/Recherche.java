@@ -56,9 +56,7 @@ public class Recherche extends JPanel{
      * 
      */
     public Recherche(String titre_page){
-        System.out.println("Page Recherche");
         
-
         //setBackground(Color.white);
         setLayout(new GridLayout(2, 1));
         titre = new JLabel(titre_page);

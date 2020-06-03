@@ -89,7 +89,6 @@ public class Formulaire extends JPanel{
      */
     public  Formulaire(){
         
-        System.out.println("Page formulaire");
         //setBackground(Color.white);
         setLayout(new BorderLayout());
 

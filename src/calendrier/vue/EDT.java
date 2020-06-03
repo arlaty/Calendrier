@@ -25,11 +25,15 @@ public class EDT extends JPanel{
     JTable tab;
     Zoom zoom_page;
     
+    /**
+     * Constructeur qui instancie l'objet EDT qui correspond au contenu de l'emploi du temps
+     *  
+     *
+     */
     public EDT(){
-        System.out.println("Page EDT");
+        
         //new GridLayout( nbligne, nbcolonne) --> nb ligne en fonction du nombre de jour où il y a cours au max 5 par semaine
         this.setLayout(new GridLayout(5,2));
-        
         
         ajout_jour("lundi");
         ajout_jour("mardi");
@@ -39,6 +43,11 @@ public class EDT extends JPanel{
         
     }
     
+    /**
+     * méthode qui crée et rempli un tableau de l'emploi du temps d'une journée
+     * et prend en paramètre une chaine de charactère qui correspond au jour de la semaine
+     *
+     */
     private void ajout_jour(String jour){
         
         

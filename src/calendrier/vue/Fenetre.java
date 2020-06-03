@@ -45,7 +45,8 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener{
     
     
     /**
-     * Constructeur qui instancie l'objet en attribut de la classe Connexion.
+     * Constructeur de la fenêtre principale de l'application
+     * qui instancie l'objet en attribut de la classe Connexion.
      *  
      *
      */
@@ -77,19 +78,9 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener{
         
     }
 
-    @Override
-    public void actionPerformed(ActionEvent ae) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void itemStateChanged(ItemEvent ie) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
     /**
      * Fonction qui ouvre la fenêtre principale après que la connexion ait été vérifiée
-     *  
+     *  prend en paramètre la page de login pour vérifier la connexion
      *
      * @param page
      */
@@ -304,6 +295,16 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener{
         
         this.pack();
         this.setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
