@@ -6,7 +6,6 @@
 package calendrier.vue;
 
 import calendrier.controleur.Connexion;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -103,7 +102,7 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener{
         }
          
         barre();
-        recherche_form = new Recherche();
+        recherche_form = new Recherche("Emploi du temps");
         edt_content = new EDT();
         this.add(recherche_form);
         this.add(edt_content);
@@ -275,14 +274,14 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener{
         barre();
         switch(content){
             case 0: //affichage page EDT
-                recherche_form = new Recherche();
+                recherche_form = new Recherche("Emploi du temps");
                 edt_content = new EDT();
                 this.add("North", recherche_form);
                 this.add(edt_content);
                 
                 break;
             case 1: //affichage page recap cours
-                recherche_form = new Recherche();
+                recherche_form = new Recherche("Récapitulatif des cours");
                 recap_content = new Récap();
                 this.add("North", recherche_form);
                 this.add(recap_content);

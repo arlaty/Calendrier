@@ -6,18 +6,12 @@
 package calendrier.vue;
 
 import java.awt.BorderLayout;
-import javax.swing.JFrame;
 import javax.swing.JButton;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -99,7 +93,7 @@ public class Formulaire extends JPanel{
         //setBackground(Color.white);
         setLayout(new BorderLayout());
 
-        Font police = new Font("Arial", Font.BOLD, 14);
+        //Font police = new Font("Arial", Font.BOLD, 14);
         pan_espacement.setLayout(new BoxLayout(pan_espacement, BoxLayout.LINE_AXIS));
         pan_espacement.add(espacement);
         pan_titre.setLayout(new BoxLayout(pan_titre, BoxLayout.LINE_AXIS));

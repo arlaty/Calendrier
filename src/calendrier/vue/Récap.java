@@ -5,9 +5,16 @@
  */
 package calendrier.vue;
 import java.awt.Color;
+import java.awt.GridLayout;
 import javax.swing.JFrame;
-import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,8 +22,111 @@ import javax.swing.JPanel;
  */
 public class Récap extends JTabbedPane{
     
+    JPanel plus, details_pan;
+    JTable tab;
+    JFrame details_page;
+    
+    public Récap(){
+        System.out.println("Page EDT");
+        //new GridLayout( nbligne, nbcolonne) --> nb ligne en fonction du nombre de jour où il y a cours au max 5 par semaine
+        this.setLayout(new GridLayout(2,1));
+        
+        plus = new JPanel();
+        plus.setBackground(Color.WHITE);
+        
+        ajout_cours();
+        
+        tab.setAutoCreateRowSorter(true);
+        //Nous ajoutons notre tableau à notre contentPane dans un scroll
+        //Sinon les titres des colonnes ne s'afficheront pas !
+        this.add(new JScrollPane(tab));
+        this.add(plus);
+        
+        tab.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+	tab.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+ 
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if ( !e.getValueIsAdjusting() ) {
+                    int selectedRow = tab.getSelectedRow(); 
+                    affichageDetails();
+		}
+            }
+ 
+	});	
+        
+        
+    }
+    
+    private void ajout_cours(){
+        
+        //Les données du tableau qui seront à chercher depuis la BDD
+        Object[][] data = {
+            {"Maths -ING1 TD1", "lundi XX/XX/XXXX de XXhXX à XX/XX", "vendredi XX/XX/XXXX de XXhXX à XX/XX", "XXhXX", "XX"},
+            {"Maths -ING1 TD2", "lundi XX/XX/XXXX de XXhXX à XX/XX", "jeudi XX/XX/XXXX de XXhXX à XX/XX", "XXhXX", "XX"},
+            {"Java POO -ING3 TD1", "mardi XX/XX/XXXX de XXhXX à XX/XX", "mardi XX/XX/XXXX de XXhXX à XX/XX", "XXhXX", "XX"}
+        };
+        
+        //Les titres des colonnes
+        String  title[] = {"Matière -Groupe", "Première séance", "Dernière séance", "Nombre total d'heure", "Nombre de séance"};
+        
+        tab = new JTable(data, title);
+        //instance table model
+        DefaultTableModel tableModel = new DefaultTableModel(data, title) {
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+               //all cells false
+               return false;
+            }
+        };
+        tab.setModel(tableModel);
+    
+    }
+    
+    void affichageDetails(){
+        details_page = new JFrame("Détails des séances");
+        details_page.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        details_page.setLocationRelativeTo(null);
+        details_page.setAlwaysOnTop(true); 
+        
+        details_pan = new JPanel();
+       
+        //Les données du tableau qui seront à chercher depuis la BDD
+        Object[][] data = {
+            {"Jour XX/XX/XXXX", "Horaires", "Enseignant(s)", "Site Salle(s) (CAPACITE)"},
+            {"Jour XX/XX/XXXX", "Horaires", "Enseignant(s)", "Site Salle(s) (CAPACITE)"},
+            {"Jour XX/XX/XXXX", "Horaires", "Enseignant(s)", "Site Salle(s) (CAPACITE)"}
+        };
+        
+        //Les titres des colonnes
+        String  title[] = {" ", " ", " ", " ", " "};
+        
+        tab = new JTable(data, title);
+        //instance table model
+        DefaultTableModel tableModel = new DefaultTableModel(data, title) {
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+               //all cells false
+               return false;
+            }
+        };
+        tab.setModel(tableModel);
+        
+        //Nous ajoutons notre tableau à notre contentPane dans un scroll
+        //Sinon les titres des colonnes ne s'afficheront pas !
+        details_pan.add(tab);
+        
+        details_page.add(details_pan);
+        
+        details_page.pack();
+        details_page.setVisible(true);
+    
+    }
+    
      //Création de plusieurs Panneau
-    Panneau[] tPan = {   new Panneau(Color.RED), new Panneau(Color.GREEN), new Panneau(Color.BLUE)};
+    /*Panneau[] tPan = {   new Panneau(Color.RED), new Panneau(Color.GREEN), new Panneau(Color.BLUE)};
       
     //Création de notre conteneur d'onglets
     public Récap(){
@@ -30,6 +140,6 @@ public class Récap extends JTabbedPane{
           //onglet.addTab("Onglet n° "+(++i), pan);
 
         }
-    }
+    }*/
     
 }

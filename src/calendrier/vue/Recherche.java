@@ -5,14 +5,10 @@
  */
 package calendrier.vue;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.GridLayout;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -22,6 +18,11 @@ import javax.swing.JRadioButton;
  * @author lizziedelaisser
  */
 public class Recherche extends JPanel{
+    
+    private JPanel pan_espacement = new JPanel();
+        private JLabel espacement = new JLabel(" ");    
+    private JPanel pan_titre = new JPanel();
+        private JLabel titre;
     
     private JPanel pan = new JPanel();
     private JPanel pan_bis = new JPanel();
@@ -53,30 +54,37 @@ public class Recherche extends JPanel{
      *  
      * 
      */
-    public Recherche(){
+    public Recherche(String titre_page){
         System.out.println("Page Recherche");
         
 
-        setBackground(Color.white);
+        //setBackground(Color.white);
         setLayout(new GridLayout(2, 1));
+        titre = new JLabel(titre_page);
 
-
+        //rehcerche par COURS dispo pour tous
         //boucle pour entrer les cours depuis la bdd etc
         recherche_cours.addItem("ALL");
         recherche_cours.addItem("1");
 
+        //recherche par ... non dispo pour ETUDIANT
         recherche_promo.addItem("ALL");
         recherche_groupe.addItem("ALL");
         recherche_utilisateur.addItem("ALL");
         recherche_année.addItem("ALL");
         recherche_semaine.addItem("ALL");
 
+        //recherche par ... non dispo pour ETUDIANT, ENSEIGNANT
         etudiants.setSelected(true);
         //etudiants.addActionListener(new StateListener());
         //enseignants.addActionListener(new StateListener());
         type_utilisateur.add(etudiants);
         type_utilisateur.add(enseignants);
-
+        
+        pan_espacement.setLayout(new BoxLayout(pan_espacement, BoxLayout.LINE_AXIS));
+        pan_espacement.add(espacement);
+        pan_titre.setLayout(new BoxLayout(pan_titre, BoxLayout.LINE_AXIS));
+        pan_titre.add(titre);
 
         pan.setLayout(new BoxLayout(pan, BoxLayout.LINE_AXIS));
         pan_bis.setLayout(new BoxLayout(pan_bis, BoxLayout.LINE_AXIS));
@@ -90,12 +98,16 @@ public class Recherche extends JPanel{
         pan.add(etudiants);
         pan.add(utilisateur);
         pan.add(recherche_utilisateur);
-        pan_bis.add(année);
-        pan_bis.add(recherche_année);
-        pan_bis.add(semaine);
-        pan_bis.add(recherche_semaine);
+        if(titre_page != "Récapitulatif des cours"){
+            pan_bis.add(année);
+            pan_bis.add(recherche_année);
+            pan_bis.add(semaine);
+            pan_bis.add(recherche_semaine);
+        }
 
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        this.add(pan_espacement);
+        this.add(pan_titre);
         add(pan);
         add(pan_bis);
     }
