@@ -102,6 +102,7 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener{
         }
          
         barre();
+        
         recherche_form = new Recherche("Emploi du temps");
         edt_content = new EDT();
         this.add(recherche_form);

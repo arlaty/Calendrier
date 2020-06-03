@@ -47,6 +47,7 @@ public class Recherche extends JPanel{
     private JLabel année = new JLabel("Année");
     private JComboBox recherche_semaine = new JComboBox();
     private JLabel semaine = new JLabel("Semaine");
+    private JLabel mois = new JLabel("Indique le mois correspondant ou bien le lundi correspondant");
     
     
     /**
@@ -103,6 +104,7 @@ public class Recherche extends JPanel{
             pan_bis.add(recherche_année);
             pan_bis.add(semaine);
             pan_bis.add(recherche_semaine);
+            pan_bis.add(mois);
         }
 
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));

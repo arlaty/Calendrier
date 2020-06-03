@@ -22,9 +22,10 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Récap extends JTabbedPane{
     
-    JPanel plus, details_pan;
-    JTable tab;
-    JFrame details_page;
+    private JPanel plus, details_pan;
+    private JTable tab;
+    private JFrame details_page;
+    private Zoom zoom_page;
     
     public Récap(){
         System.out.println("Page EDT");
@@ -113,6 +114,20 @@ public class Récap extends JTabbedPane{
             }
         };
         tab.setModel(tableModel);
+        tab.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+	tab.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+ 
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if ( !e.getValueIsAdjusting() ) {
+                    int selectedRow = tab.getSelectedRow(); 
+                    details_page.dispose();
+                    zoom_page = new Zoom();
+        
+		}
+            }
+ 
+	});
         
         //Nous ajoutons notre tableau à notre contentPane dans un scroll
         //Sinon les titres des colonnes ne s'afficheront pas !

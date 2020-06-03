@@ -122,7 +122,7 @@ public class Formulaire extends JPanel{
         heure_début.setLabelFor(saisie_heure_début);
         heure_fin.setLabelFor(saisie_heure_fin);
         saisie_heure_début.addItem("8h30");
-        saisie_heure_fin.addItem("10h00"); 
+        saisie_heure_fin.addItem("10h00"); // ou deux checkbox après 1h30 et 3h + 15 min de pause
         pan_horaires.setLayout(new BoxLayout(pan_horaires, BoxLayout.LINE_AXIS));
         pan_horaires.add(horaires);
         pan_horaires.add(heure_début);
@@ -182,26 +182,17 @@ public class Formulaire extends JPanel{
         
         btn_ajouter.addActionListener((ActionEvent arg0) -> { 
             /* VU QUE TOUS LES CHAMPS SONT DES MENUS DÉROULANTS AKA COMBO BOX TOUT EST REMPLI D'OFFICE
+            //VERIFIER que les horaires sont par 1h30 
+            //VERIFIER que le volume groupe / Capacité salle et correcte
+            //VERIFIER que la date ne correspond pas à un weekend 
+            //VERIFIER que au moins un ensigant est séletionné et au moins un groupe
+            
             if())
                 JOptionPane.showMessageDialog(null, "Data Missing");
             else       
                 JOptionPane.showMessageDialog(null, "Data Submitted");*/
         });
-        
-        /* CODE POUR UN FUTURE BOUTON CLEAR OU PAR EX SI CHANGE D'ONGLET DANS MENU PRINCIPAL ALORS EFFECE DONNÉES SÉLECTIONÉES
-        btnClear.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                textField_1.setText(null);
-                textField_2.setText(null);
-                textField.setText(null);
-                textArea_1.setText(null);
-                radioButton.setSelected(false);
-                radioButton_1.setSelected(false);
-                comboBox.setSelectedItem("Select");
-                 
-                 
-            }
-        });*/
+      
         
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         this.add(pan_espacement);

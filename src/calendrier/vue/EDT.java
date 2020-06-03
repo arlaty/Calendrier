@@ -10,6 +10,9 @@ import java.awt.GridLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,6 +23,7 @@ public class EDT extends JPanel{
    
     JPanel plus;
     JTable tab;
+    Zoom zoom_page;
     
     public EDT(){
         System.out.println("Page EDT");
@@ -62,6 +66,19 @@ public class EDT extends JPanel{
             }
         };
         tab.setModel(tableModel);
+        tab.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+	tab.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+ 
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if ( !e.getValueIsAdjusting() ) {
+                    int selectedRow = tab.getSelectedRow(); 
+                    zoom_page = new Zoom();
+        
+		}
+            }
+ 
+	});
         
         //Nous ajoutons notre tableau à notre contentPane dans un scroll
         //Sinon les titres des colonnes ne s'afficheront pas !
