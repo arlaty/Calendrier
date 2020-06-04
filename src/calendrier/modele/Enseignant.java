@@ -5,10 +5,14 @@
  */
 package calendrier.modele;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author alexi
  */
-public class Enseignant {
-    
+public class Enseignant extends Utilisateur{
+    public Enseignant (String inemail,String innom,String inprenom,ArrayList<Seance> inseances,Reporting inreporting){
+        super(inemail,innom,inprenom,inseances,inreporting);
+    }
 }
