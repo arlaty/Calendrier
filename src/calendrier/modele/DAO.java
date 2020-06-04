@@ -6,15 +6,16 @@
 package calendrier.modele;
 
 import calendrier.controleur.Connexion;
-import calendrier.controleur.Connexion;
+import java.sql.Connection;
+
 /**
  *
- * @author alexi
+ * @author clem
  */
 public abstract class DAO<T> {
-    protected Connexion connect =null;
+    protected Connection connect =null;
     
-    public DAO(Connexion conn){
+    public DAO(Connection conn){
     this.connect = conn;
   }
    
