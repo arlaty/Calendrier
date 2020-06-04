@@ -11,18 +11,40 @@ import java.util.ArrayList;
  *
  * @author alexi
  */
-public class Utilisateur {
+public abstract class Utilisateur {
     String email;
     String nom;
     String prenom;
     ArrayList<Seance> seances;
     Reporting reporting;
-    
-    public Utilisateur(String inemail,String innom,String inprenom,ArrayList<Seance> inseances,Reporting inreporting){
-        email=inemail;
-        nom=innom;
-        prenom=inprenom;
-        seances=inseances;
-        reporting=inreporting;
+
+    public Utilisateur() {}
+
+    public Utilisateur(String email, String nom, String prenom, ArrayList<Seance> seances, Reporting reporting) {
+        this.email = email;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.seances = seances;
+        this.reporting = reporting;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public ArrayList<Seance> getSeances() {
+        return seances;
+    }
+
+    public Reporting getReporting() {
+        return reporting;
     }
 }

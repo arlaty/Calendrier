@@ -15,10 +15,25 @@ public class Etudiant extends Utilisateur{
     int numero;
     int TD;
     String Promo;
-    public Etudiant (String inemail,String innom,String inprenom,int innumero,int inTD,String inpromo,ArrayList<Seance> inseances,Reporting inreporting){
-        super(inemail,innom,inprenom,inseances,inreporting);
-        numero=innumero;
-        TD=inTD;
-        Promo=inpromo;
+
+    public Etudiant() {}
+    
+    public Etudiant(int numero, int TD, String Promo, String email, String nom, String prenom, ArrayList<Seance> seances, Reporting reporting) {
+        super(email, nom, prenom, seances, reporting);
+        this.numero = numero;
+        this.TD = TD;
+        this.Promo = Promo;
     }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public int getTD() {
+        return TD;
+    }
+
+    public String getPromo() {
+        return Promo;
+    }   
 }

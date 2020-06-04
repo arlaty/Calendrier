@@ -9,6 +9,6 @@ package calendrier.modele;
  *
  * @author alexi
  */
-public abstract class Reporting {
+public class AdminDAO {
     
 }

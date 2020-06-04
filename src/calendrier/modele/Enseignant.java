@@ -12,7 +12,16 @@ import java.util.ArrayList;
  * @author alexi
  */
 public class Enseignant extends Utilisateur{
-    public Enseignant (String inemail,String innom,String inprenom,ArrayList<Seance> inseances,Reporting inreporting){
-        super(inemail,innom,inprenom,inseances,inreporting);
+    RechercheEnseignant champ;
+    
+    public Enseignant() {}
+
+    public Enseignant(RechercheEnseignant champ, String email, String nom, String prenom, ArrayList<Seance> seances, Reporting reporting) {
+        super(email, nom, prenom, seances, reporting);
+        this.champ = champ;
+    }
+
+    public RechercheEnseignant getChamp() {
+        return champ;
     }
 }

@@ -12,7 +12,15 @@ import java.util.ArrayList;
  * @author alexi
  */
 public class Referent extends Utilisateur{
-    public Referent (String inemail,String innom,String inprenom,ArrayList<Seance> inseances,Reporting inreporting){
-        super(inemail,innom,inprenom,inseances,inreporting);
+    RechercheComplet champs;
+    public Referent() {}
+
+    public Referent(RechercheComplet champs, String email, String nom, String prenom, ArrayList<Seance> seances, Reporting reporting) {
+        super(email, nom, prenom, seances, reporting);
+        this.champs = champs;
+    }
+
+    public RechercheComplet getChamps() {
+        return champs;
     }
 }
