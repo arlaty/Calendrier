@@ -16,12 +16,36 @@ public class Admin extends Utilisateur{
     
     public Admin() {}
 
-    public Admin(RechercheComplet champs, String email, String nom, String prenom, ArrayList<Seance> seances, Reporting reporting) {
-        super(email, nom, prenom, seances, reporting);
-        this.champs = champs;
+    public Admin(String email, String nom, String prenom) {
+        super(email, nom, prenom);
+        this.champs = null;
     }
 
     public RechercheComplet getChamps() {
         return champs;
-    }    
+    }
+
+    public void setChamps(RechercheComplet champs) {
+        this.champs = champs;
+    }
+
+    @Override
+    public int getNumero() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getTD() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getPromo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void createReporting() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

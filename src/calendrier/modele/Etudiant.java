@@ -13,13 +13,13 @@ import java.util.ArrayList;
  */
 public class Etudiant extends Utilisateur{
     int numero;
-    int TD;
+    String TD;
     String Promo;
 
     public Etudiant() {}
     
-    public Etudiant(int numero, int TD, String Promo, String email, String nom, String prenom, ArrayList<Seance> seances, Reporting reporting) {
-        super(email, nom, prenom, seances, reporting);
+    public Etudiant(String email, String nom, String prenom,int numero, String TD, String Promo) {
+        super(email, nom, prenom);
         this.numero = numero;
         this.TD = TD;
         this.Promo = Promo;
@@ -29,11 +29,16 @@ public class Etudiant extends Utilisateur{
         return numero;
     }
 
-    public int getTD() {
+    public String getTD() {
         return TD;
     }
 
     public String getPromo() {
         return Promo;
     }   
+
+    @Override
+    public void createReporting() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

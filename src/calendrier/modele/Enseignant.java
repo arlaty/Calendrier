@@ -16,12 +16,36 @@ public class Enseignant extends Utilisateur{
     
     public Enseignant() {}
 
-    public Enseignant(RechercheEnseignant champ, String email, String nom, String prenom, ArrayList<Seance> seances, Reporting reporting) {
-        super(email, nom, prenom, seances, reporting);
+    public Enseignant(String email, String nom, String prenom) {
+        super(email, nom, prenom);
+        this.champ = null;
+    }
+
+    public void setChamp(RechercheEnseignant champ) {
         this.champ = champ;
     }
 
     public RechercheEnseignant getChamp() {
         return champ;
+    }
+
+    @Override
+    public int getNumero() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getTD() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getPromo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void createReporting() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

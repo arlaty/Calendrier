@@ -3,12 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package calendrier.modele;
+package calendrier.vue;
+
+import javax.swing.JPanel;
 
 /**
  *
- * @author alexi
+ * @author lizziedelaisser
  */
-public class EtudiantDAO {
+public class Reporting extends JPanel{
+        
+    public Reporting(){
+        System.out.println("Page Reporting");
     
+    }
 }

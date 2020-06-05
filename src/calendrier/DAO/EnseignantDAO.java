@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package calendrier.modele;
+package calendrier.DAO;
 
 /**
  *
  * @author alexi
  */
-public class ReferentDAO {
+public class EnseignantDAO {
     
 }

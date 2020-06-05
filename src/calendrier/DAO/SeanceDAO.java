@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package calendrier.modele;
+package calendrier.DAO;
 
 
 import calendrier.controleur.Connexion;
+import calendrier.modele.Seance;
 import java.sql.*;
 
 /**

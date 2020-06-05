@@ -20,12 +20,16 @@ public abstract class Utilisateur {
 
     public Utilisateur() {}
 
-    public Utilisateur(String email, String nom, String prenom, ArrayList<Seance> seances, Reporting reporting) {
+    public Utilisateur(String email, String nom, String prenom) {
         this.email = email;
         this.nom = nom;
         this.prenom = prenom;
+        this.seances = null;
+        this.reporting = null;
+    }
+
+    public void setSeances(ArrayList<Seance> seances) {
         this.seances = seances;
-        this.reporting = reporting;
     }
 
     public String getEmail() {
@@ -47,4 +51,8 @@ public abstract class Utilisateur {
     public Reporting getReporting() {
         return reporting;
     }
+    public abstract void createReporting();
+    public abstract int getNumero();
+    public abstract String getTD();
+    public abstract String getPromo();
 }
