@@ -18,9 +18,6 @@ public class Controler {
      */
     public static void main(String[] args) {
          Fenetre f = new Fenetre();
-         f.login();
-         System.out.println("ifdnsz");
-         f.ouverture();
     }
     
 }

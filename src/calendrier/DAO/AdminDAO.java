@@ -5,10 +5,55 @@
  */
 package calendrier.DAO;
 
+import calendrier.modele.Admin;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  *
  * @author alexi
  */
-public class AdminDAO {
+public class AdminDAO extends DAO<Admin>{
+
+    public AdminDAO(Connection conn) {
+        super(conn);
+    }
+
+    @Override
+    public boolean create(Admin obj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean delete(Admin obj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean update(Admin obj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Admin find(int id) {
+        Admin user= null;
+        try{
+            ResultSet result = connect.createStatement(
+             ResultSet.TYPE_SCROLL_INSENSITIVE,
+             ResultSet.CONCUR_READ_ONLY)
+             .executeQuery("SELECT * FROM utilisateur WHERE id="+id);
+            if(result.first()){
+                user=new Admin(
+                result.getString("email"),
+                result.getString("nom"),
+                result.getString("prenom")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
     
 }

@@ -107,8 +107,9 @@ public class Login extends JFrame implements ActionListener {
            résultat.setText("Email ou mot de passe invalide");
        }
        else{
-           dispose();
-       }
+            OK=true;
+            dispose();
+        }
    }    
 
     public Utilisateur getUser() {

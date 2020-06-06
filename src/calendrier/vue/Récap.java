@@ -4,8 +4,11 @@
  * and open the template in the editor.
  */
 package calendrier.vue;
+import calendrier.modele.Seance;
+import calendrier.modele.Utilisateur;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -26,13 +29,15 @@ public class Récap extends JTabbedPane{
     private JTable tab;
     private JFrame details_page;
     private Zoom zoom_page;
+    private Utilisateur user;
     
     /**
      * Constructeur qui instancie l'objet Récap qui correspond au content du récapitulatif des cours.
      *  
      *
      */
-    public Récap(){
+    public Récap(Utilisateur user){
+        this.user=user;
         //new GridLayout( nbligne, nbcolonne) --> nb ligne en fonction du nombre de jour où il y a cours au max 5 par semaine
         this.setLayout(new GridLayout(2,1));
         
@@ -57,7 +62,6 @@ public class Récap extends JTabbedPane{
                     affichageDetails();
 		}
             }
- 
 	});	
         
     }
@@ -123,10 +127,15 @@ public class Récap extends JTabbedPane{
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if ( !e.getValueIsAdjusting() ) {
-                    int selectedRow = tab.getSelectedRow(); 
-                    details_page.dispose();
-                    zoom_page = new Zoom();
-        
+                    int selectedRow = tab.getSelectedRow();
+                    System.out.print(tab.getSelectedRow());
+                    System.out.print(tab.getSelectedColumn());
+                    ArrayList<Seance> seances= user.getSeances();
+                    for(Seance seance: seances){
+                        if (seance.getDate().equals(String.valueOf(tab.getValueAt(selectedRow,4)))){
+                            zoom_page = new Zoom(seance);
+                        }
+                    }
 		}
             }
  

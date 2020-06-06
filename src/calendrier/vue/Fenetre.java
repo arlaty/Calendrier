@@ -51,18 +51,19 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener{
      *
      */
     public Fenetre() {
+  
         // creation par heritage de la fenetre
         super("Calendrier");
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setVisible(false);
-    }
-    
-    public void login(){
+        
         Login page0 = new Login();
         //si connection
-        user=page0.getUser();
+        
+        ouverture(page0);
+        
     }
 
     /**
@@ -71,17 +72,23 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener{
      *
      * @param page
      */
-    public void ouverture (){
+    public void ouverture (Login page){
+        while (page.OK==false) {
+            this.setVisible(false);
+            //attention il faut mettre au moins une ligne de code pour que la boucle soit valide
+            //System.out.println("1");
+            //tant que le login n'est pas valider on affiche pas la fenêtre
+        }
+        user=page.getUser();
         barre();
         
         recherche_form = new Recherche("Emploi du temps");
-        edt_content = new EDT();
+        edt_content = new EDT(user);
         this.add(recherche_form);
         this.add(edt_content);
         this.pack();
         this.setVisible(true);
     }
-    
     /**
      * Fonction qui crée l'entête constituée d'une barre d'infos et du menu principal
      *  
@@ -247,14 +254,14 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener{
         switch(content){
             case 0: //affichage page EDT
                 recherche_form = new Recherche("Emploi du temps");
-                edt_content = new EDT();
+                edt_content = new EDT(user);
                 this.add("North", recherche_form);
                 this.add(edt_content);
                 
                 break;
             case 1: //affichage page recap cours
                 recherche_form = new Recherche("Récapitulatif des cours");
-                recap_content = new Récap();
+                recap_content = new Récap(user);
                 this.add("North", recherche_form);
                 this.add(recap_content);
                 break;

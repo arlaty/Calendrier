@@ -45,13 +45,21 @@ public class DAOFactory {
             if (result.getInt("droit")==4){
                 EtudiantDAO etudiantDAO = new EtudiantDAO(conn);
                 user=etudiantDAO.find(result.getInt("id"));
-                System.out.println(user.getEmail());
-              System.out.println(user.getPrenom());
-              System.out.println(user.getNom());
-              System.out.println(user.getNumero());
-              System.out.println(user.getTD());
-              System.out.println(user.getPromo());
             }
+            else if (result.getInt("droit")==3){
+                EnseignantDAO enseignantDAO = new EnseignantDAO(conn);
+                user=enseignantDAO.find(result.getInt("id"));
+            }
+            else if (result.getInt("droit")==2){
+                ReferentDAO referentDAO = new ReferentDAO(conn);
+                user=referentDAO.find(result.getInt("id"));
+            }
+            else if (result.getInt("droit")==1){
+                AdminDAO adminDAO = new AdminDAO(conn);
+                user=adminDAO.find(result.getInt("id"));
+            }
+            SeanceDAO seanceDAO= new SeanceDAO(conn);
+            user.setSeances(seanceDAO.findAll(result.getInt("id"), result.getInt("droit")));
         }
       } catch (SQLException e) {
         e.printStackTrace();

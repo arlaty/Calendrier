@@ -5,6 +5,8 @@
  */
 package calendrier.vue;
 
+import calendrier.modele.Seance;
+import calendrier.modele.Utilisateur;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -18,11 +20,13 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+
 /**
  *
  * @author lizziedelaisser
  */
 public class Zoom extends JFrame{
+
     JPanel pan;
     JTable tab;
     private JPanel pan_date = new JPanel();
@@ -72,7 +76,7 @@ public class Zoom extends JFrame{
      *  
      *
      */
-    public Zoom(){
+    public Zoom(Seance seance){
         super("Zoom sur une séance");
         
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -81,18 +85,33 @@ public class Zoom extends JFrame{
         
         pan = new JPanel();
         
+        ArrayList<String> enseignants= seance.getEnseignants();
+        String listenseignants="";
+        for (String enseignant:enseignants){
+            listenseignants+=enseignant+" ";
+        }
+        String listgroupes="";
+        ArrayList<String> groupes= seance.getGroupes();
+        for (String groupe:groupes){
+            listgroupes+=groupe+" ";
+        }
+        String listsalles="";
+        ArrayList<String> salles= seance.getSalles();
+        for (String salle:salles){
+            listsalles+=salle+" ";
+        }
         //données à charger depuis la table séance
-        seance_date= new JLabel("lundi XX/XX/XXXX");
-        seance_heure_début = new JLabel("XXhXX");
-        seance_heure_fin  = new JLabel("XXhXX");
-        seance_état = new JLabel("validé");
-        seance_cours = new JLabel("Maths");
-        seance_type_cours = new JLabel("CM");
-        seance_promo = new JLabel("ING1");
-        seance_groupe = new JLabel("TD1");
-        seance_enseignant = new JLabel("Test Laura");
-        seance_site = new JLabel("E1");
-        seance_salle= new JLabel("EM009");
+        seance_date= new JLabel(seance.getDate().toString());
+        seance_heure_début = new JLabel(seance.getHeure_debut().toString());
+        seance_heure_fin  = new JLabel(seance.getHeure_fin().toString());
+        seance_état = new JLabel(seance.getEtat());
+        seance_cours = new JLabel(seance.getCours());
+        seance_type_cours = new JLabel(seance.getType_cours());
+        seance_promo = new JLabel(seance.getPromo());
+        seance_groupe = new JLabel(listgroupes);
+        seance_enseignant = new JLabel(listenseignants);
+        seance_site = new JLabel(seance.getSite());
+        seance_salle= new JLabel(listsalles);
         
         
         pan_date.setLayout(new BoxLayout(pan_date, BoxLayout.LINE_AXIS));

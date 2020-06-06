@@ -5,7 +5,6 @@
  */
 package calendrier.DAO;
 
-import static calendrier.DAO.DAOFactory.conn;
 import calendrier.modele.Etudiant;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -40,17 +39,17 @@ public class EtudiantDAO extends DAO<Etudiant>{
     public Etudiant find(int id) {
         Etudiant user= null;
         try{
-            ResultSet result = DAOFactory.conn.createStatement(
+            ResultSet result = connect.createStatement(
              ResultSet.TYPE_SCROLL_INSENSITIVE,
              ResultSet.CONCUR_READ_ONLY)
-             .executeQuery("SELECT * FROM utilisateur JOIN etudiant WHERE id="+id+" and Id_utilisateur="+id);
+             .executeQuery("SELECT * FROM utilisateur JOIN etudiant WHERE id="+id+" and Id_utilisateur=id");
             if(result.first()){
-                ResultSet result2 = DAOFactory.conn.createStatement(
+                ResultSet result2 = connect.createStatement(
                  ResultSet.TYPE_SCROLL_INSENSITIVE,
                  ResultSet.CONCUR_READ_ONLY)
                  .executeQuery("SELECT * FROM groupe WHERE id="+result.getInt("Id_groupe"));
                 if(result2.first()){
-                    ResultSet result3 = DAOFactory.conn.createStatement(
+                    ResultSet result3 = connect.createStatement(
                      ResultSet.TYPE_SCROLL_INSENSITIVE,
                      ResultSet.CONCUR_READ_ONLY)
                      .executeQuery("SELECT * FROM promotion WHERE id="+result2.getInt("Id_promotion"));

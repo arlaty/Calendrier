@@ -19,33 +19,33 @@ public class Seance {
     Date date;
     Time heure_debut;
     Time heure_fin;
-    String Etat;
-    ArrayList<String> Enseignants;
+    String etat;
+    ArrayList<String> enseignants;
     String type_cours;
     String cours;
     ArrayList<String> salles;
-    String sites;
+    String site;
     int capacite;
     ArrayList<String> groupes;
-    String Promo;
+    String promo;
 
     public Seance() {}
 
-    public Seance(int ID, int semaine,Date date, Time heure_debut, Time heure_fin, String Etat, ArrayList<String> Enseignants, String type_cours, String cours, ArrayList<String> salles,String sites, int capacite, ArrayList<String> groupes, String Promo) {
+    public Seance(int ID, int semaine,Date date, Time heure_debut, Time heure_fin, String Etat, ArrayList<String> Enseignants, String type_cours, String cours, ArrayList<String> salles,String site, int capacite, ArrayList<String> groupes, String Promo) {
         this.ID = ID;
         this.semaine = semaine;
         this.date= date;
         this.heure_debut = heure_debut;
         this.heure_fin = heure_fin;
-        this.Etat = Etat;
-        this.Enseignants = Enseignants;
+        this.etat = Etat;
+        this.enseignants = Enseignants;
         this.type_cours = type_cours;
         this.cours = cours;
         this.salles = salles;
-        this.sites = sites;
+        this.site = site;
         this.capacite = capacite;
         this.groupes = groupes;
-        this.Promo = Promo;
+        this.promo = Promo;
     }
 
     public int getID() {
@@ -69,11 +69,11 @@ public class Seance {
     }
 
     public String getEtat() {
-        return Etat;
+        return etat;
     }
 
     public ArrayList<String> getEnseignants() {
-        return Enseignants;
+        return enseignants;
     }
 
     public String getType_cours() {
@@ -88,8 +88,8 @@ public class Seance {
         return salles;
     }
 
-    public String getSites() {
-        return sites;
+    public String getSite() {
+        return site;
     }
 
     public int getCapacite() {
@@ -101,6 +101,6 @@ public class Seance {
     }
 
     public String getPromo() {
-        return Promo;
+        return promo;
     }
 }
