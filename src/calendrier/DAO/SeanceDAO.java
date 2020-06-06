@@ -142,20 +142,20 @@ public class SeanceDAO extends DAO<Seance> {
                 groupes,
                 promo
                 );
-                System.out.println(id);
-                System.out.println(result.getInt("semaine"));
-                System.out.println(date);
-                System.out.println(result.getTime("heure_debut"));
-                System.out.println(result.getTime("heure_fin"));
-                System.out.println(result.getString("etat"));
-                System.out.println(enseignants);
-                System.out.println(result2.getString("nom"));
-                System.out.println(result3.getString("nom"));
-                System.out.println(salles);
-                System.out.println(sites);
-                System.out.println(capacite);
-                System.out.println(groupes);
-                System.out.println(promo);
+//                System.out.println(id);
+//                System.out.println(result.getInt("semaine"));
+//                System.out.println(date);
+//                System.out.println(result.getTime("heure_debut"));
+//                System.out.println(result.getTime("heure_fin"));
+//                System.out.println(result.getString("etat"));
+//                System.out.println(enseignants);
+//                System.out.println(result2.getString("nom"));
+//                System.out.println(result3.getString("nom"));
+//                System.out.println(salles);
+//                System.out.println(sites);
+//                System.out.println(capacite);
+//                System.out.println(groupes);
+//                System.out.println(promo);
             }
         } catch (SQLException e) {
             e.printStackTrace();
