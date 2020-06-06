@@ -120,7 +120,7 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener{
         
         pan.add(lab); //l'ajoute au panel
         
-        
+        zedfafz
         //configuration du menu selon le droit de l'utilisateur connecté
         Nav(1);
         setJMenuBar(navigation);
