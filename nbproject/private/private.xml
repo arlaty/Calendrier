@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Alexis/VScode/Calendrier/src/calendrier/vue/EDT.java</file>
             <file>file:/C:/Users/Alexis/VScode/Calendrier/src/calendrier/DAO/DAOFactory.java</file>
             <file>file:/C:/Users/Alexis/VScode/Calendrier/src/calendrier/DAO/EtudiantDAO.java</file>
@@ -17,6 +18,9 @@
             <file>file:/C:/Users/Alexis/VScode/Calendrier/src/calendrier/vue/Fenetre.java</file>
             <file>file:/C:/Users/Alexis/VScode/Calendrier/src/calendrier/DAO/DAO.java</file>
             <file>file:/C:/Users/Alexis/VScode/Calendrier/src/calendrier/vue/Zoom.java</file>
+=======
+            <file>file:/C:/Users/cleme/Desktop/Ing3/Semestre%20à%20PARIS/Java/ProjetPOOJava/Calendrier/src/calendrier/modele/Reporting.java</file>
+>>>>>>> 9a6678d1d8d478bd16318bb672e996ae83118245
         </group>
     </open-files>
 </project-private>
