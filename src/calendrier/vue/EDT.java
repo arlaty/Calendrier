@@ -88,7 +88,7 @@ public class EDT extends JPanel{
                 if (user.getRecherche().getCoursSelectionne().equals("ALL")) {
                     remplirLigne(data,seance,i);
                     i++;
-                } else if (user.getRecherche().getCoursSelectionne().equals(seance.getCours())){
+                }else if (user.getRecherche().getCoursSelectionne().equals(seance.getCours())){
                     remplirLigne(data,seance,i);
                     i++;
                 }
@@ -163,5 +163,4 @@ public class EDT extends JPanel{
         data[i][4]+="("+String.valueOf(seance.getCapacite())+")";
         data[i][5]=seance.getType_cours();
     }
-  
 }

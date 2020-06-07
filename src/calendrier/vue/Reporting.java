@@ -29,11 +29,14 @@ import org.jfree.ui.ApplicationFrame;
 
 /**
  *
- * @author lizziedelaisser
+ * @author clement
  */
 public class Reporting extends JPanel{
     JPanel panel;
-   
+   /**
+     * Constructeur de Reporting  qui configure le panel permettant l'affichage les diagrammes d'info de l'utilisateur
+     *  @param user 
+     */
     public Reporting(Utilisateur user){
         calendrier.modele.Reporting repo=user.getReporting();
         Map<String, Integer> dia1=repo.getInfo1();
@@ -44,7 +47,7 @@ public class Reporting extends JPanel{
         System.out.println("Page Reporting");
         panel = new JPanel(new GridLayout(2, 2));
         PieDataset data1=createData(dia1,user,1);
-        PieDataset data2=createData(dia2,user,1);
+        PieDataset data2=createData(dia2,user,2);
         PieDataset data3=createData(dia3,user,1);
         PieDataset data4=createData(dia4,user,0);
         JFreeChart chart1 = null;
@@ -80,6 +83,14 @@ public class Reporting extends JPanel{
         
     }
     
+    /**
+     * Methode qui configure les données du diagramme
+     * @param t
+     * @param user 
+     * @param v 
+     * @return PieDataset  
+     *  
+     */
     public PieDataset createData(Map<String, Integer> t,Utilisateur user, int v){
         DefaultPieDataset dataset = new DefaultPieDataset();
         // Afficher le contenu du MAP
@@ -90,8 +101,7 @@ public class Reporting extends JPanel{
     		while(iterateur.hasNext())
     		{
     			Object key= iterateur.next();
-    			System.out.println (key+"=>"+t.get(key));
-                        if(((user instanceof Admin)||(user instanceof Referent))&&(v==0))
+                        if((((user instanceof Admin)||(user instanceof Referent)||(user instanceof Enseignant))&&(v==0))||((((user instanceof Admin)||(user instanceof Referent)))&&(v==2)))
                         {
                             dataset.setValue((Comparable) key, (t.get(key)));
                         }else dataset.setValue((Comparable) key, (t.get(key))*1.5);
