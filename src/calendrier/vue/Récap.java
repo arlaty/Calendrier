@@ -59,6 +59,7 @@ public class Récap extends JTabbedPane{
             public void valueChanged(ListSelectionEvent e) {
                 if ( !e.getValueIsAdjusting() ) {
                     int selectedRow = tab.getSelectedRow(); 
+                    System.out.print("affiche int selectedRow dans recap " + selectedRow);
                     affichageDetails();
 		}
             }
@@ -128,7 +129,7 @@ public class Récap extends JTabbedPane{
             public void valueChanged(ListSelectionEvent e) {
                 if ( !e.getValueIsAdjusting() ) {
                     int selectedRow = tab.getSelectedRow();
-                    System.out.print(tab.getSelectedRow());
+                    System.out.print("test affiche " +tab.getSelectedRow());
                     System.out.print(tab.getSelectedColumn());
                     ArrayList<Seance> seances= user.getSeances();
                     /*for(Seance seance: seances){
@@ -143,9 +144,8 @@ public class Récap extends JTabbedPane{
         
         //Nous ajoutons notre tableau à notre contentPane dans un scroll
         //Sinon les titres des colonnes ne s'afficheront pas !
-        details_pan.add(tab);
+        details_page.add(new JScrollPane(tab));
         
-        details_page.add(details_pan);
         
         details_page.pack();
         details_page.setVisible(true);
