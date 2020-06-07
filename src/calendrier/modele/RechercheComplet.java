@@ -16,13 +16,8 @@ public class RechercheComplet extends RechercheEnseignant{
     ArrayList<String> enseignant;
     ArrayList<String> salle;
 
-    public RechercheComplet() {}
-
-    public RechercheComplet(ArrayList<String> etudiant, ArrayList<String> enseignant, ArrayList<String> salle, ArrayList<String> cours, ArrayList<String> promo, ArrayList<String> groupe) {
-        super(cours, promo, groupe);
-        this.etudiant = etudiant;
-        this.enseignant = enseignant;
-        this.salle = salle;
+    public RechercheComplet(Utilisateur user) {
+        super(user);
     }
 
     public ArrayList<String> getEtudiant() {

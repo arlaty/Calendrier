@@ -5,6 +5,9 @@
  */
 package calendrier.vue;
 
+import calendrier.modele.Enseignant;
+import calendrier.modele.Etudiant;
+import calendrier.modele.Utilisateur;
 import java.awt.GridLayout;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -55,30 +58,11 @@ public class Recherche extends JPanel{
      *  
      * 
      */
-    public Recherche(String titre_page){
+    public Recherche(String titre_page, Utilisateur user){
         
         //setBackground(Color.white);
         setLayout(new GridLayout(2, 1));
         titre = new JLabel(titre_page);
-
-        //rehcerche par COURS dispo pour tous
-        //boucle pour entrer les cours depuis la bdd etc
-        recherche_cours.addItem("ALL");
-        recherche_cours.addItem("1");
-
-        //recherche par ... non dispo pour ETUDIANT
-        recherche_promo.addItem("ALL");
-        recherche_groupe.addItem("ALL");
-        recherche_utilisateur.addItem("ALL");
-        recherche_année.addItem("ALL");
-        recherche_semaine.addItem("ALL");
-
-        //recherche par ... non dispo pour ETUDIANT, ENSEIGNANT
-        etudiants.setSelected(true);
-        //etudiants.addActionListener(new StateListener());
-        //enseignants.addActionListener(new StateListener());
-        type_utilisateur.add(etudiants);
-        type_utilisateur.add(enseignants);
         
         pan_espacement.setLayout(new BoxLayout(pan_espacement, BoxLayout.LINE_AXIS));
         pan_espacement.add(espacement);
@@ -87,22 +71,49 @@ public class Recherche extends JPanel{
 
         pan.setLayout(new BoxLayout(pan, BoxLayout.LINE_AXIS));
         pan_bis.setLayout(new BoxLayout(pan_bis, BoxLayout.LINE_AXIS));
+        //rehcerche par COURS dispo pour tous
+        //boucle pour entrer les cours depuis la bdd etc
+        for (String cour: user.getRecherche().getCours()){
+            recherche_cours.addItem(cour);
+        }
         pan.add(cours);
         pan.add(recherche_cours);
-        pan.add(promo);
-        pan.add(recherche_promo);
-        pan.add(groupe);
-        pan.add(recherche_groupe);
-        pan.add(enseignants);
-        pan.add(etudiants);
-        pan.add(utilisateur);
-        pan.add(recherche_utilisateur);
-        if(titre_page != "Récapitulatif des cours"){
-            pan_bis.add(année);
-            pan_bis.add(recherche_année);
-            pan_bis.add(semaine);
-            pan_bis.add(recherche_semaine);
-            pan_bis.add(mois);
+
+        //recherche par ... non dispo pour ETUDIANT
+        if (!(user instanceof Etudiant)){
+            for (String promos: user.getRecherche().getPromo()){
+                recherche_promo.addItem(promos);
+            }
+            pan.add(promo);
+            pan.add(recherche_promo);
+            for (String groupes: user.getRecherche().getGroupe()){
+                recherche_groupe.addItem(groupes);
+            }
+            pan.add(groupe);
+            pan.add(recherche_groupe);
+            recherche_utilisateur.addItem("ALL");
+            pan.add(utilisateur);
+            pan.add(recherche_utilisateur);
+            if(titre_page != "Récapitulatif des cours"){
+                recherche_année.addItem("ALL");
+                pan_bis.add(année);
+                pan_bis.add(recherche_année);
+                recherche_semaine.addItem("ALL");
+                pan_bis.add(semaine);
+                pan_bis.add(recherche_semaine);
+                pan_bis.add(mois);
+            }
+
+            //recherche par ... non dispo pour ETUDIANT, ENSEIGNANT
+            if (!(user instanceof Enseignant)){
+                etudiants.setSelected(true);
+                //etudiants.addActionListener(new StateListener());
+                //enseignants.addActionListener(new StateListener());
+                type_utilisateur.add(etudiants);
+                pan.add(etudiants);
+                type_utilisateur.add(enseignants);
+                pan.add(enseignants);
+            }
         }
 
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -110,6 +121,5 @@ public class Recherche extends JPanel{
         this.add(pan_titre);
         add(pan);
         add(pan_bis);
-    }
-  
+    }  
 }

@@ -5,14 +5,12 @@
         <group>
             <file>file:/C:/Users/Alexis/VScode/Calendrier/src/calendrier/vue/Récap.java</file>
             <file>file:/C:/Users/Alexis/VScode/Calendrier/src/calendrier/vue/EDT.java</file>
-            <file>file:/C:/Users/Alexis/VScode/Calendrier/src/calendrier/DAO/DAOFactory.java</file>
             <file>file:/C:/Users/Alexis/VScode/Calendrier/src/calendrier/modele/Seance.java</file>
-            <file>file:/C:/Users/Alexis/VScode/Calendrier/src/calendrier/modele/Reporting.java</file>
-            <file>file:/C:/Users/Alexis/VScode/Calendrier/src/calendrier/DAO/EtudiantDAO.java</file>
+            <file>file:/C:/Users/Alexis/VScode/Calendrier/src/calendrier/DAO/DAOFactory.java</file>
             <file>file:/C:/Users/Alexis/VScode/Calendrier/src/calendrier/controleur/Controler.java</file>
             <file>file:/C:/Users/Alexis/VScode/Calendrier/src/calendrier/vue/Login.java</file>
-            <file>file:/C:/Users/Alexis/VScode/Calendrier/src/calendrier/DAO/SeanceDAO.java</file>
             <file>file:/C:/Users/Alexis/VScode/Calendrier/src/calendrier/modele/Utilisateur.java</file>
+            <file>file:/C:/Users/Alexis/VScode/Calendrier/src/calendrier/modele/RechercheUser.java</file>
             <file>file:/C:/Users/Alexis/VScode/Calendrier/src/calendrier/vue/Fenetre.java</file>
             <file>file:/C:/Users/Alexis/VScode/Calendrier/src/calendrier/vue/Zoom.java</file>
         </group>
