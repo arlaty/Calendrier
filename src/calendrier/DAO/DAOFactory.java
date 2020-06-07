@@ -79,55 +79,37 @@ public class DAOFactory {
             else{
                 user.setRecherche(new RechercheComplet(user));
             }
+            Reporting t=new Reporting(user);
+            user.setReporting(t);
+            //Printf pour verifier implementatation de l'utilisateur et plus particulierement du reporting
+
+            ArrayList<Seance>s=user.getSeances();
+            for(int i=0; i<s.size();i++)
+            {
+                Seance sa=s.get(i);
+            }
+            Reporting r=user.getReporting();
+            Map<String, Integer> m=r.getInfo1();
+            Map<String, Integer> y=r.getInfo3();
+            // Afficher le contenu du MAP
+            Set listKeys=m.keySet();  // Obtenir la liste des clés
+            Iterator iterateur=listKeys.iterator();
+            // Parcourir les clés et afficher les entrées de chaque clé;
+            while(iterateur.hasNext())
+            {
+                Object key= iterateur.next();
+            }
+            Set listKeyss=y.keySet();  // Obtenir la liste des clés
+            Iterator Iterateur=listKeyss.iterator();
+            // Parcourir les clés et afficher les entrées de chaque clé;
+            while(Iterateur.hasNext())
+            {
+                Object key= Iterateur.next();
+            }
         }
       } catch (SQLException e) {
         e.printStackTrace();
       }
-      Reporting t=new Reporting(user);
-      user.setReporting(t);
-      //Printf pour verifier implementatation de l'utilisateur et plus particulierement du reporting
-      System.out.println(user.getNom());
-      System.out.println(user.getPrenom());
-      System.out.println(user.getEmail());
-      
-      ArrayList<Seance>s=user.getSeances();
-      for(int i=0; i<s.size();i++)
-      {
-          Seance sa=s.get(i);
-          System.out.println(sa.getCours());
-      }
-      Reporting r=user.getReporting();
-      Map<String, Integer> m=r.getInfo1();
-      Map<String, Integer> y=r.getInfo3();
-      Map<String, Integer> p=r.getInfo2();
-      // Afficher le contenu du MAP
-    		Set listKeys=m.keySet();  // Obtenir la liste des clés
-    		Iterator iterateur=listKeys.iterator();
-    		// Parcourir les clés et afficher les entrées de chaque clé;
-    		while(iterateur.hasNext())
-    		{
-    			Object key= iterateur.next();
-    			System.out.println (key+"=>"+m.get(key));
-                     
-    		}
-                Set listKeyss=y.keySet();  // Obtenir la liste des clés
-    		Iterator Iterateur=listKeyss.iterator();
-    		// Parcourir les clés et afficher les entrées de chaque clé;
-    		while(Iterateur.hasNext())
-    		{
-    			Object key= Iterateur.next();
-    			System.out.println (key+"=>"+y.get(key));
-                     
-    		}
-                 Set listKey=p.keySet();  // Obtenir la liste des clés
-    		Iterator Iterateu=listKey.iterator();
-    		// Parcourir les clés et afficher les entrées de chaque clé;
-    		while(Iterateu.hasNext())
-    		{
-    			Object key= Iterateu.next();
-    			System.out.println (key+"=>"+p.get(key));
-                     
-    		}
       return user;
     }
 

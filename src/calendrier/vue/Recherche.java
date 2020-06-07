@@ -9,6 +9,8 @@ import calendrier.modele.Enseignant;
 import calendrier.modele.Etudiant;
 import calendrier.modele.Utilisateur;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
@@ -44,7 +46,7 @@ public class Recherche extends JPanel{
     private JRadioButton enseignants = new JRadioButton("Enseignants");
     
     private JComboBox recherche_utilisateur = new JComboBox();
-    private JLabel utilisateur = new JLabel("   Utilisateur");
+    private JLabel utilisateur = new JLabel("   Enseignants");
     
     private JComboBox recherche_année = new JComboBox();
     private JLabel année = new JLabel("Année");
@@ -76,9 +78,25 @@ public class Recherche extends JPanel{
         for (String cour: user.getRecherche().getCours()){
             recherche_cours.addItem(cour);
         }
+        recherche_cours.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                //si on sélectionne une autre valeur on l'affiche
+                user.getRecherche().setCoursSelectionne((String)recherche_cours.getSelectedItem());
+            }
+        });
         pan.add(cours);
         pan.add(recherche_cours);
-
+        for (Integer semaine: user.getRecherche().getSemaine()){
+            recherche_semaine.addItem(semaine);
+        }
+        recherche_semaine.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                //si on sélectionne une autre valeur on l'affiche
+                user.getRecherche().setSemaineSelectionne((Integer)recherche_semaine.getSelectedItem());
+            }
+        });
+        pan_bis.add(semaine);
+        pan_bis.add(recherche_semaine);
         //recherche par ... non dispo pour ETUDIANT
         if (!(user instanceof Etudiant)){
             for (String promos: user.getRecherche().getPromo()){
@@ -91,28 +109,13 @@ public class Recherche extends JPanel{
             }
             pan.add(groupe);
             pan.add(recherche_groupe);
-            recherche_utilisateur.addItem("ALL");
-            pan.add(utilisateur);
-            pan.add(recherche_utilisateur);
-            if(titre_page != "Récapitulatif des cours"){
-                recherche_année.addItem("ALL");
-                pan_bis.add(année);
-                pan_bis.add(recherche_année);
-                recherche_semaine.addItem("ALL");
-                pan_bis.add(semaine);
-                pan_bis.add(recherche_semaine);
-                pan_bis.add(mois);
-            }
-
             //recherche par ... non dispo pour ETUDIANT, ENSEIGNANT
             if (!(user instanceof Enseignant)){
-                etudiants.setSelected(true);
-                //etudiants.addActionListener(new StateListener());
-                //enseignants.addActionListener(new StateListener());
-                type_utilisateur.add(etudiants);
-                pan.add(etudiants);
-                type_utilisateur.add(enseignants);
-                pan.add(enseignants);
+                for (String groupes: user.getRecherche().getEnseignant()){
+                    recherche_utilisateur.addItem(groupes);
+                }
+                pan.add(utilisateur);
+                pan.add(recherche_utilisateur);
             }
         }
 

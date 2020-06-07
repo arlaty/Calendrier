@@ -13,6 +13,7 @@ import java.util.ArrayList;
  */
 public class Admin extends Utilisateur{
     RechercheComplet champs;
+<<<<<<< HEAD
     /**
      * 
      */
@@ -22,28 +23,62 @@ public class Admin extends Utilisateur{
      * @param email
      * @param nom
      * @param prenom 
+=======
+    
+    /**
+     *
+     */
+    public Admin() {}
+
+    /**
+     *
+     * @param email
+     * @param nom
+     * @param prenom
+>>>>>>> 7e2efa00787d94df9577376218efa1286f40f9a2
      */
     public Admin(String email, String nom, String prenom) {
         super(email, nom, prenom);
         this.champs = null;
     }
+<<<<<<< HEAD
     /**
      * 
      * @return 
+=======
+
+    /**
+     *
+     * @return
+>>>>>>> 7e2efa00787d94df9577376218efa1286f40f9a2
      */
     public RechercheComplet getChamps() {
         return champs;
     }
+<<<<<<< HEAD
     /**
      * 
      * @param champs 
+=======
+
+    /**
+     *
+     * @param champs
+>>>>>>> 7e2efa00787d94df9577376218efa1286f40f9a2
      */
     public void setChamps(RechercheComplet champs) {
         this.champs = champs;
     }
+<<<<<<< HEAD
     /**
      * 
      * @return 
+=======
+
+    /**
+     *
+     * @return
+>>>>>>> 7e2efa00787d94df9577376218efa1286f40f9a2
      */
     @Override
     public int getNumero() {

@@ -29,7 +29,15 @@ public class RechercheUser {
         semaine.add(semaineSelectionne);
         cours.add(coursSelectionne);
         for(Seance seance: seances){
-            semaine.add(seance.getSemaine());
+            find=false;
+            for(int semain: semaine){
+                if (semain==seance.getSemaine()){
+                    find=true;
+                }
+            }
+            if(!find){
+                semaine.add(seance.getSemaine());
+            }
             find=false;
             for(String cour: cours){
                 if (cour.equals(seance.getCours())){
@@ -40,6 +48,10 @@ public class RechercheUser {
                 cours.add(seance.getCours());
             }
         }
+    }
+
+    public void setCoursSelectionne(String coursSelectionne) {
+        this.coursSelectionne = coursSelectionne;
     }
 
     public ArrayList<String> getCours() {
@@ -67,6 +79,14 @@ public class RechercheUser {
     }
 
     public ArrayList<String> getGroupe() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Iterable<String> getEnseignant() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String getPromoSelectionne() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

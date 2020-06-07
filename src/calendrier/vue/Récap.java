@@ -112,7 +112,7 @@ public class Récap extends JTabbedPane{
             ResultSet result2 = connect.createStatement(
             ResultSet.TYPE_SCROLL_INSENSITIVE,
             ResultSet.CONCUR_READ_ONLY)
-            .executeQuery("SELECT * FROM seance_groupes INNER JOIN seance ON seance.id=seance_groupes.Id_seance WHERE Id_groupe="+result.getString("id")+" ORDER BY date and heure_debut");
+            .executeQuery("SELECT * FROM seance_groupes INNER JOIN seance ON seance.id=seance_groupes.Id_seance WHERE Id_groupe="+result.getString("groupe.id")+" ORDER BY date and heure_debut");
             while(result2.next()){
                 ResultSet result3 = connect.createStatement(
                 ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -166,9 +166,9 @@ public class Récap extends JTabbedPane{
         } catch (SQLException ex) {
             Logger.getLogger(Récap.class.getName()).log(Level.SEVERE, null, ex);
         }
-        String[] split= cell.split("-");
-        String td= split[1].split(" ")[0];
-        String promo=split[1].split(" ")[1];
+        String[] split= cell.split("-");//sdhfzavyefv-efe zefe
+        String td= split[1].split(" ")[0];//efe
+        String promo=split[1].split(" ")[1];//zefe
         ResultSet result = connect.createStatement(
         ResultSet.TYPE_SCROLL_INSENSITIVE,
         ResultSet.CONCUR_READ_ONLY)
@@ -194,7 +194,7 @@ public class Récap extends JTabbedPane{
              ResultSet.CONCUR_READ_ONLY)
              .executeQuery("SELECT * FROM seance_enseignants JOIN utilisateur WHERE Id_seance="+result2.getInt("id")+" and Id_enseignant=id");
             while(result3.next()){
-                data[i][2]+=result3.getString("nom")+" "+result3.getString("prenom");
+                data[i][2]+=result3.getString("nom")+" "+result3.getString("prenom")+" ";
             }
             int capacite=0;
             ResultSet result4 = connect.createStatement(
@@ -207,10 +207,10 @@ public class Récap extends JTabbedPane{
             ResultSet.CONCUR_READ_ONLY)
             .executeQuery("SELECT * FROM site WHERE id="+result4.getInt("Id_site"));
             result5.first();
-            data[i][3]=result5.getString("nom");
+            data[i][3]=result5.getString("nom")+" ";
             result4.beforeFirst();
             while(result4.next()){
-                data[i][3]+=result4.getString("nom");
+                data[i][3]+=result4.getString("nom")+" ";
                 capacite+=result4.getInt("capacite");
             }
             data[i][3]+=" ("+capacite+")";

@@ -28,7 +28,6 @@ public class RechercheEnseignant extends RechercheUser{
         promo.add(promoSelectionne);
         groupe.add(groupeSelectionne);
         for(Seance seance: seances){
-            semaine.add(seance.getSemaine());
             find=false;
             for(String promo1: promo){
                 if (promo1.equals(seance.getPromo())){
@@ -51,14 +50,55 @@ public class RechercheEnseignant extends RechercheUser{
             }
         }
     }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public String getPromoSelectionne() {
+        return promoSelectionne;
+    }
     
+    /**
+     *
+     * @return
+     */
+    public String getGroupeSelectionne() {
+        return groupeSelectionne;
+    }
+    
+    /**
+     *
+     * @return
+     */
     @Override
     public ArrayList<String> getPromo() {
         return promo;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public ArrayList<String> getGroupe() {
         return groupe;
+    }
+
+    /**
+     *
+     * @param promoSelectionne
+     */
+    public void setPromoSelectionne(String promoSelectionne) {
+        this.promoSelectionne = promoSelectionne;
+    }
+
+    /**
+     *
+     * @param groupeSelectionne
+     */
+    public void setGroupeSelectionne(String groupeSelectionne) {
+        this.groupeSelectionne = groupeSelectionne;
     }
 }

@@ -163,7 +163,6 @@ public class Reporting {
             String mesTypeSeances=C.get(i);
             nomTC=mesTypeSeances;
             Info2.put(nomTC, Collections.frequency(C, nomTC));
-            
         }
         }
         return Info2;

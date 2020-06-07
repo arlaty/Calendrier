@@ -93,9 +93,17 @@ public class EDT extends JPanel{
         for(Seance seance: seances){
             if (formater.format(date).equals(formater.format(seance.getDate()))){
                 if (user.getRecherche().getCoursSelectionne().equals("ALL")) {
-                    i++;
+                    if (user.getRecherche().getPromoSelectionne().equals("ALL")) {
+                        i++;
+                    } else if (user.getRecherche().getPromoSelectionne().equals(seance.getPromo())){
+                        i++;
+                    }
                 } else if (user.getRecherche().getCoursSelectionne().equals(seance.getCours())){
-                    i++;
+                    if (user.getRecherche().getPromoSelectionne().equals("ALL")) {
+                        i++;
+                    } else if (user.getRecherche().getPromoSelectionne().equals(seance.getPromo())){
+                        i++;
+                    }
                 }
             }
         }
@@ -133,14 +141,9 @@ public class EDT extends JPanel{
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if ( !e.getValueIsAdjusting() ) {
-                    int selectedRow = tab.getSelectedRow();
-                    System.out.print("\n affiche int selectedRow dans edt " + selectedRow);
-                    recupInfos(tab,selectedRow);
                     ArrayList<Seance> seances= user.getSeances();
                     for(Seance seance: seances){
-                        {
-                            zoom_page = new Zoom(seance,user);
-                        }
+                        zoom_page = new Zoom(seance,user);
                     }
 		}
             }
