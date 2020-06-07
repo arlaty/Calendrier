@@ -41,22 +41,41 @@ public class EDT extends JPanel{
         //new GridLayout( nbligne, nbcolonne) --> nb ligne en fonction du nombre de jour où il y a cours au max 5 par semaine
         this.setLayout(new GridLayout(5,2));
         
-        Calendar calendar= Calendar.getInstance();
+        ArrayList <JPanel> list_plus= new ArrayList <JPanel>();
+        for (int i=0; i<5; i++){
+            plus = new JPanel();
+            plus.setBackground(Color.WHITE);
+            list_plus.add(plus);
+        }
+        
+        ArrayList <JTable> week = new ArrayList <JTable>();
+        Calendar calendar =  Calendar.getInstance();
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
         calendar.set(Calendar.WEEK_OF_YEAR, user.getRecherche().getSemaineSelectionne());
-        ajout_jour(user,calendar.getTime());
+        //ajout_jour(user,calendar.getTime());
+        week.add(ajout_jour(user,calendar.getTime()));
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
         calendar.set(Calendar.WEEK_OF_YEAR, user.getRecherche().getSemaineSelectionne());
-        ajout_jour(user,calendar.getTime());
+        //ajout_jour(user,calendar.getTime());
+        week.add(ajout_jour(user,calendar.getTime()));
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
         calendar.set(Calendar.WEEK_OF_YEAR, user.getRecherche().getSemaineSelectionne());
-        ajout_jour(user,calendar.getTime());
+        //ajout_jour(user,calendar.getTime());
+        week.add(ajout_jour(user,calendar.getTime()));
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
         calendar.set(Calendar.WEEK_OF_YEAR, user.getRecherche().getSemaineSelectionne());
-        ajout_jour(user,calendar.getTime());
+        //ajout_jour(user,calendar.getTime());
+        week.add(ajout_jour(user,calendar.getTime()));
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
         calendar.set(Calendar.WEEK_OF_YEAR, user.getRecherche().getSemaineSelectionne());
-        ajout_jour(user,calendar.getTime());
+        //ajout_jour(user,calendar.getTime());
+        week.add(ajout_jour(user,calendar.getTime()));
+        
+        for(int i=0; i<week.size(); i++){
+            this.add(new JScrollPane(week.get(i)));
+            System.out.println(i + " ");
+            this.add(list_plus.get(i));
+        }
     }
     
     /**
@@ -64,10 +83,9 @@ public class EDT extends JPanel{
      * et prend en paramètre une chaine de charactère qui correspond au jour de la semaine
      *
      */
-    private void ajout_jour(Utilisateur user,Date date){
+    private JTable ajout_jour(Utilisateur user,Date date){
         
-        plus = new JPanel();
-        plus.setBackground(Color.WHITE);
+        
         //Les données du tableau qui seront à chercher depuis la BDD
         SimpleDateFormat formater = new SimpleDateFormat("ddMMyy");
         ArrayList<Seance> seances= user.getSeances();
@@ -75,9 +93,17 @@ public class EDT extends JPanel{
         for(Seance seance: seances){
             if (formater.format(date).equals(formater.format(seance.getDate()))){
                 if (user.getRecherche().getCoursSelectionne().equals("ALL")) {
-                    i++;
+                    if (user.getRecherche().getPromoSelectionne().equals("ALL")) {
+                        i++;
+                    } else if (user.getRecherche().getPromoSelectionne().equals(seance.getPromo())){
+                        i++;
+                    }
                 } else if (user.getRecherche().getCoursSelectionne().equals(seance.getCours())){
-                    i++;
+                    if (user.getRecherche().getPromoSelectionne().equals("ALL")) {
+                        i++;
+                    } else if (user.getRecherche().getPromoSelectionne().equals(seance.getPromo())){
+                        i++;
+                    }
                 }
             }
         }
@@ -125,8 +151,10 @@ public class EDT extends JPanel{
         
         //Nous ajoutons notre tableau à notre contentPane dans un scroll
         //Sinon les titres des colonnes ne s'afficheront pas !
-        this.add(new JScrollPane(tab));
-        this.add(plus);
+        //this.add(new JScrollPane(tab));
+        //this.add(plus);
+        
+        return tab;
     }
     
     protected static void recupInfos(JTable table, int selectedRow) {

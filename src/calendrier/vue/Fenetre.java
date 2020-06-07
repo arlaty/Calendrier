@@ -114,7 +114,7 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener{
         
         
         //configuration du menu selon le droit de l'utilisateur connecté
-        Nav(1);
+        Nav();
         setJMenuBar(navigation);
         
         this.setContentPane(pan);
@@ -129,7 +129,7 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener{
         //Les données du tableau qui seront à chercher depuis la BDD
         Class.forName("com.mysql.jdbc.Driver");
         String urlDatabase = "jdbc:mysql://localhost/calendrier";
-        Connection connect = DriverManager.getConnection(urlDatabase, "root", "");
+        Connection connect = DriverManager.getConnection(urlDatabase, "root", "root");
         ResultSet result4 = connect.createStatement(
         ResultSet.TYPE_SCROLL_INSENSITIVE,
         ResultSet.CONCUR_READ_ONLY)
@@ -167,9 +167,8 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener{
      * fonction qui initialise le menu de navigation principal et qui prend en paramètre le droit de l'utlisateur afin d'initialiser les bons onglets
      *  
      *
-     * @param droit
      */
-    public void Nav(int droit){
+    public void Nav(){
        
         navigation = new JMenuBar();
         
@@ -200,8 +199,7 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener{
         //Le premier ajouté sera tout à gauche de la barre de menu et inversement pour le dernier
         navigation.add(cours);
         navigation.add(reporting);
-        if(droit==1) //seul l'admin a accès aux Salles
-            navigation.add(salles);
+        navigation.add(salles);
 
         navigation.add(Box.createHorizontalGlue());
         navigation.add(logout);

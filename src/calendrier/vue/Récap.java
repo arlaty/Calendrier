@@ -12,7 +12,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -233,14 +238,13 @@ public class Récap extends JTabbedPane{
             public void valueChanged(ListSelectionEvent e) {
                 if ( !e.getValueIsAdjusting() ) {
                     int selectedRow = tab2.getSelectedRow();
-                    System.out.print(tab.getSelectedRow());
-                    System.out.print(tab.getSelectedColumn());
-                    ArrayList<Seance> seances= user.getSeances();
-                    for(Seance seance: seances){
-                        if (seance.getDate().equals(String.valueOf(tab2.getValueAt(selectedRow,4)))){
-                            zoom_page = new Zoom(seance,user);
-                        }
+                    
+                    try {
+                        recupInfos(tab2, selectedRow);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(Récap.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    
 		}
             }
 	});
@@ -253,20 +257,38 @@ public class Récap extends JTabbedPane{
         details_page.pack();
         details_page.setVisible(true);
     }
-     //Création de plusieurs Panneau
-    /*Panneau[] tPan = {   new Panneau(Color.RED), new Panneau(Color.GREEN), new Panneau(Color.BLUE)};
-      
-    //Création de notre conteneur d'onglets
-    public Récap(){
+    /** Fontion qui récupère les infos de la ligne du table des séances pour afficher la fenêtre de zoom
+     * qui prend en paramètre la table en question et l'index du row selected
+     * 
+     * @param table
+     * @param selectedRow 
+     */
+    public void recupInfos(JTable table, int selectedRow) throws ParseException {
+	if ( selectedRow>=0 ) {
+            
+            for(int i=0; i<table.getColumnCount(); i++) {
+                int column = table.convertColumnIndexToView(i); 
+                System.out.println(String.valueOf(table.getValueAt(selectedRow,column)));
+            }
+            
+            ArrayList <Seance> seances = user.getSeances();
+            for(Seance seance: seances){
+                String[] split = String.valueOf(table.getValueAt(selectedRow,1)).split(" ");
+                String date = String.valueOf(table.getValueAt(selectedRow,0));
+                String pattern = "yyyy-MM-dd";
+                DateFormat df = new SimpleDateFormat(pattern);
+                String reportDate = df.format(seance.getDate());
+                String pattern2 = "hh:mm:ss";
+                DateFormat df2 = new SimpleDateFormat(pattern2);
+                String reportTime = df2.format(seance.getHeure_debut());
+                if ((reportDate.equals(date))&&(reportTime.equals(split[0]))){
+  
+                    zoom_page = new Zoom(seance,user);
+             
+                }
+                
+            }
+	}
         
-        System.out.println("Page Recap");
-        int i = 0;
-        for(Panneau pan : tPan){
-          //Méthode d'ajout d'onglet
-          add("Onglet n° "+(++i), pan);
-          //Vous pouvez aussi utiliser la méthode addTab
-          //onglet.addTab("Onglet n° "+(++i), pan);
-
-        }
-    }*/
+    }
 }

@@ -117,12 +117,6 @@ public class Recherche extends JPanel{
                 pan.add(utilisateur);
                 pan.add(recherche_utilisateur);
             }
-            if(titre_page != "Récapitulatif des cours"){
-                recherche_année.addItem("ALL");
-                pan_bis.add(année);
-                pan_bis.add(recherche_année);
-                pan_bis.add(mois);
-            }
         }
 
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));

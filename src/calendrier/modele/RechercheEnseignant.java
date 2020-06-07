@@ -50,21 +50,54 @@ public class RechercheEnseignant extends RechercheUser{
             }
         }
     }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public String getPromoSelectionne() {
+        return promoSelectionne;
+    }
     
+    /**
+     *
+     * @return
+     */
+    public String getGroupeSelectionne() {
+        return groupeSelectionne;
+    }
+    
+    /**
+     *
+     * @return
+     */
     @Override
     public ArrayList<String> getPromo() {
         return promo;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public ArrayList<String> getGroupe() {
         return groupe;
     }
 
+    /**
+     *
+     * @param promoSelectionne
+     */
     public void setPromoSelectionne(String promoSelectionne) {
         this.promoSelectionne = promoSelectionne;
     }
 
+    /**
+     *
+     * @param groupeSelectionne
+     */
     public void setGroupeSelectionne(String groupeSelectionne) {
         this.groupeSelectionne = groupeSelectionne;
     }
