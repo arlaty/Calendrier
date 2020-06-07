@@ -6,7 +6,6 @@
 package calendrier.DAO;
 
 
-import calendrier.modele.Seance;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
