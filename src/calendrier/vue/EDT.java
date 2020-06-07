@@ -44,7 +44,7 @@ public class EDT extends JPanel{
         ArrayList <JPanel> list_plus= new ArrayList <JPanel>();
         for (int i=0; i<5; i++){
             plus = new JPanel();
-            plus.setBackground(Color.MAGENTA);
+            plus.setBackground(Color.WHITE);
             list_plus.add(plus);
         }
         
@@ -153,7 +153,11 @@ public class EDT extends JPanel{
         
         return tab;
     }
-    
+    /** Fonction qui récupère les infos de la ligne sélectionnée de la table et les affiche
+     * 
+     * @param table
+     * @param selectedRow 
+     */
     protected static void recupInfos(JTable table, int selectedRow) {
         if ( selectedRow>=0 ) {
             for(int i=0; i<table.getColumnCount(); i++) {
@@ -163,7 +167,12 @@ public class EDT extends JPanel{
             }
         }
     }
-    
+    /**Fonction qui remplit les données du tableau suivant les informations de séance de l'utilisateur
+     * 
+     * @param data
+     * @param seance
+     * @param i 
+     */
     private void remplirLigne(Object[][] data,Seance seance,int i){
         data[i][0]=seance.getHeure_debut().toString()+"-"+seance.getHeure_fin().toString();
         data[i][1]=seance.getCours();

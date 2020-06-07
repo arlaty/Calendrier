@@ -15,19 +15,32 @@ public class RechercheComplet extends RechercheEnseignant{
     ArrayList<String> etudiant;
     ArrayList<String> enseignant;
     ArrayList<String> salle;
-
+    
+    /**
+     * 
+     * @param user 
+     */
     public RechercheComplet(Utilisateur user) {
         super(user);
     }
-
+    /**
+     * 
+     * @return 
+     */
     public ArrayList<String> getEtudiant() {
         return etudiant;
     }
-
+    /**
+     * 
+     * @return 
+     */
     public ArrayList<String> getEnseignant() {
         return enseignant;
     }
-
+    /**
+     * 
+     * @return 
+     */
     public ArrayList<String> getSalle() {
         return salle;
     }    

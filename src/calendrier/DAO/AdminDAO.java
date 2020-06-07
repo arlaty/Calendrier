@@ -15,26 +15,46 @@ import java.sql.SQLException;
  * @author alexi
  */
 public class AdminDAO extends DAO<Admin>{
-
+    
+    /**
+     * 
+     * @param conn 
+     */
     public AdminDAO(Connection conn) {
         super(conn);
     }
-
+    /**
+     * 
+     * @param obj
+     * @return 
+     */
     @Override
     public boolean create(Admin obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    /**
+     * 
+     * @param obj
+     * @return 
+     */
     @Override
     public boolean delete(Admin obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    /**
+     * 
+     * @param obj
+     * @return 
+     */
     @Override
     public boolean update(Admin obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    /**
+     * 
+     * @param id
+     * @return 
+     */
     @Override
     public Admin find(int id) {
         Admin user= null;
