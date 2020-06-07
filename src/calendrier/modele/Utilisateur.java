@@ -39,6 +39,9 @@ public abstract class Utilisateur {
     public void setSeances(ArrayList<Seance> seances) {
         this.seances = seances;
     }
+    public void setReporting(Reporting r) {
+        this.reporting = r;
+    }
 
     public String getEmail() {
         return email;
