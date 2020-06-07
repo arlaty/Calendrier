@@ -268,7 +268,7 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener{
                 break;   
             case 3: //affichage page reporting
                 System.out.println("Demande reporting");
-                reporting_content = new Reporting();
+                reporting_content = new Reporting(user);
                 this.add(reporting_content);
                 break;
             case 4: //affichage page salles

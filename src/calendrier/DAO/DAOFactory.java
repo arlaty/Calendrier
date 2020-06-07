@@ -99,6 +99,7 @@ public class DAOFactory {
       Reporting r=user.getReporting();
       Map<String, Integer> m=r.getInfo1();
       Map<String, Integer> y=r.getInfo3();
+      Map<String, Integer> p=r.getInfo2();
       // Afficher le contenu du MAP
     		Set listKeys=m.keySet();  // Obtenir la liste des clés
     		Iterator iterateur=listKeys.iterator();
@@ -116,6 +117,15 @@ public class DAOFactory {
     		{
     			Object key= Iterateur.next();
     			System.out.println (key+"=>"+y.get(key));
+                     
+    		}
+                 Set listKey=p.keySet();  // Obtenir la liste des clés
+    		Iterator Iterateu=listKey.iterator();
+    		// Parcourir les clés et afficher les entrées de chaque clé;
+    		while(Iterateu.hasNext())
+    		{
+    			Object key= Iterateu.next();
+    			System.out.println (key+"=>"+p.get(key));
                      
     		}
       return user;
