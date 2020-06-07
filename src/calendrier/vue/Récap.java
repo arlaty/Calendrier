@@ -93,7 +93,7 @@ public class Récap extends JTabbedPane{
         String urlDatabase = "jdbc:mysql://localhost/calendrier";
         Connection connect=null;
         try {
-            connect = DriverManager.getConnection(urlDatabase, "root", "root");
+            connect = DriverManager.getConnection(urlDatabase, "root", "");
         } catch (SQLException ex) {
             Logger.getLogger(Récap.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -162,7 +162,7 @@ public class Récap extends JTabbedPane{
         String urlDatabase = "jdbc:mysql://localhost/calendrier";
         Connection connect=null;
         try {
-            connect = DriverManager.getConnection(urlDatabase, "root", "root");
+            connect = DriverManager.getConnection(urlDatabase, "root", "");
         } catch (SQLException ex) {
             Logger.getLogger(Récap.class.getName()).log(Level.SEVERE, null, ex);
         }
