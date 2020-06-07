@@ -81,4 +81,8 @@ public class RechercheUser {
     public ArrayList<String> getGroupe() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public Iterable<String> getEnseignant() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

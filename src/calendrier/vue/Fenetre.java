@@ -5,6 +5,7 @@
  */
 package calendrier.vue;
 
+import calendrier.modele.Admin;
 import calendrier.modele.Utilisateur;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -188,7 +189,7 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener{
         cours.add(edt);  
         
         cours.add(recap);
-        if(droit==1) //seul l'admin a accès à l'ajout d'une séance
+        if(user instanceof Admin) //seul l'admin a accès à l'ajout d'une séance
             cours.add(ajout);
 
         reporting.add(reporting_chart);
@@ -283,7 +284,7 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener{
                 break;   
             case 3: //affichage page reporting
                 System.out.println("Demande reporting");
-                reporting_content = new Reporting();
+                reporting_content = new Reporting(user);
                 this.add(reporting_content);
                 break;
             case 4: //affichage page salles

@@ -58,8 +58,6 @@ public class Formulaire extends JPanel{
         private JLabel promo = new JLabel("Promo");
         //chargé suivant les groupes existants
         //private ArrayList <JCheckBox> list_groupe;
-        private JCheckBox groupe1 = new JCheckBox("TD1");
-        private JCheckBox groupe2 = new JCheckBox("TD2");
     
     private JPanel pan_enseignant= new JPanel();
         //chargé suivant les enseignants qui s'occupent du cours sélectionnés plus haut
@@ -146,54 +144,33 @@ public class Formulaire extends JPanel{
         saisie_type_cours.addItem("Soutien");
         pan_cours.setLayout(new BoxLayout(pan_cours, BoxLayout.LINE_AXIS));
         for (String cours : user.getRecherche().getCours()){
-            saisie_cours.addItem(cours);
+            if (!cours.equals("ALL"))saisie_cours.addItem(cours);
         }
         pan_cours.add(cours);
         pan_cours.add(saisie_cours);
         pan_cours.add(type_cours);
         pan_cours.add(saisie_type_cours);
         
-           
-        for (String promo : user.getRecherche().getPromo()){
-            saisie_cours.addItem(promo);
+        for (String promos: user.getRecherche().getPromo()){
+            if (!promos.equals("ALL"))saisie_promo.addItem(promos);
         }
         pan_groupe.setLayout(new BoxLayout(pan_groupe, BoxLayout.LINE_AXIS));
         pan_groupe.add(promo);
         pan_groupe.add(saisie_promo);
-        pan_groupe.add(groupe1);
-        pan_groupe.add(groupe2);
-
+        for (String cours: user.getRecherche().getGroupe()){
+            if (!cours.equals("ALL"))pan_groupe.add(new JCheckBox(cours));
+        }
         
         pan_enseignant.setLayout(new BoxLayout(pan_enseignant, BoxLayout.LINE_AXIS));
         pan_enseignant.add(enseignants);
-        pan_enseignant.add(enseignant1);
-        pan_enseignant.add(enseignant2);
+        for (String cours: user.getRecherche().getEnseignant()){
+            if (!cours.equals("ALL"))pan_enseignant.add(new JCheckBox(cours));
+        }
 
-        
-        saisie_site.addItem("E1");
-        saisie_site.addItem("E2");
-        saisie_site.addItem("E3"); 
-        pan_site.setLayout(new BoxLayout(pan_site, BoxLayout.LINE_AXIS));
-        pan_site.add(site);
-        pan_site.add(saisie_site);
-        pan_site.add(salle1);
-        pan_site.add(salle2);
-        pan_site.add(salle3);
-        
-        
         pan_btn.add(btn_ajouter);
         
         btn_ajouter.addActionListener((ActionEvent arg0) -> { 
-            /* VU QUE TOUS LES CHAMPS SONT DES MENUS DÉROULANTS AKA COMBO BOX TOUT EST REMPLI D'OFFICE
-            //VERIFIER que les horaires sont par 1h30 
-            //VERIFIER que le volume groupe / Capacité salle et correcte
-            //VERIFIER que la date ne correspond pas à un weekend 
-            //VERIFIER que au moins un ensigant est séletionné et au moins un groupe
             
-            if())
-                JOptionPane.showMessageDialog(null, "Data Missing");
-            else       
-                JOptionPane.showMessageDialog(null, "Data Submitted");*/
         });
       
         

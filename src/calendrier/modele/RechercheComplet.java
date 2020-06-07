@@ -12,18 +12,46 @@ import java.util.ArrayList;
  * @author alexi
  */
 public class RechercheComplet extends RechercheEnseignant{
-    ArrayList<String> etudiant;
     ArrayList<String> enseignant;
     ArrayList<String> salle;
+    String enseignantSelectionne="ALL";
+    String salleSelectionne="ALL";
 
     public RechercheComplet(Utilisateur user) {
         super(user);
+        ArrayList<Seance> seances = user.getSeances();
+        enseignant=new ArrayList<>();
+        salle=new ArrayList<>();
+        boolean find;
+        enseignant.add(enseignantSelectionne);
+        salle.add(salleSelectionne);
+        for(Seance seance: seances){
+            for(String enseignants: seance.getEnseignants()){
+                find=false;
+                for(String enseignant: enseignant){
+                    if (enseignant.equals(enseignants)){
+                        find=true;
+                    }
+                }
+                if(!find){
+                    enseignant.add(enseignants);
+                }
+            }
+            for(String salles: seance.getSalles()){
+                find=false;
+                for(String sal: salle){
+                    if (sal.equals(salles)){
+                        find=true;
+                    }
+                }
+                if(!find){
+                    groupe.add(salles);
+                }
+            }
+        }
     }
 
-    public ArrayList<String> getEtudiant() {
-        return etudiant;
-    }
-
+    @Override
     public ArrayList<String> getEnseignant() {
         return enseignant;
     }
@@ -31,4 +59,12 @@ public class RechercheComplet extends RechercheEnseignant{
     public ArrayList<String> getSalle() {
         return salle;
     }    
+
+    public void setEnseignantSelectionne(String enseignantSelectionne) {
+        this.enseignantSelectionne = enseignantSelectionne;
+    }
+
+    public void setSalleSelectionne(String salleSelectionne) {
+        this.salleSelectionne = salleSelectionne;
+    }
 }

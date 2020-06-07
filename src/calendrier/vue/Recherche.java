@@ -46,7 +46,7 @@ public class Recherche extends JPanel{
     private JRadioButton enseignants = new JRadioButton("Enseignants");
     
     private JComboBox recherche_utilisateur = new JComboBox();
-    private JLabel utilisateur = new JLabel("   Utilisateur");
+    private JLabel utilisateur = new JLabel("   Enseignants");
     
     private JComboBox recherche_année = new JComboBox();
     private JLabel année = new JLabel("Année");
@@ -109,25 +109,19 @@ public class Recherche extends JPanel{
             }
             pan.add(groupe);
             pan.add(recherche_groupe);
-            recherche_utilisateur.addItem("ALL");
-            pan.add(utilisateur);
-            pan.add(recherche_utilisateur);
+            //recherche par ... non dispo pour ETUDIANT, ENSEIGNANT
+            if (!(user instanceof Enseignant)){
+                for (String groupes: user.getRecherche().getEnseignant()){
+                    recherche_utilisateur.addItem(groupes);
+                }
+                pan.add(utilisateur);
+                pan.add(recherche_utilisateur);
+            }
             if(titre_page != "Récapitulatif des cours"){
                 recherche_année.addItem("ALL");
                 pan_bis.add(année);
                 pan_bis.add(recherche_année);
                 pan_bis.add(mois);
-            }
-
-            //recherche par ... non dispo pour ETUDIANT, ENSEIGNANT
-            if (!(user instanceof Enseignant)){
-                etudiants.setSelected(true);
-                //etudiants.addActionListener(new StateListener());
-                //enseignants.addActionListener(new StateListener());
-                type_utilisateur.add(etudiants);
-                pan.add(etudiants);
-                type_utilisateur.add(enseignants);
-                pan.add(enseignants);
             }
         }
 

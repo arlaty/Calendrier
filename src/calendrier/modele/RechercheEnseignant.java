@@ -28,7 +28,6 @@ public class RechercheEnseignant extends RechercheUser{
         promo.add(promoSelectionne);
         groupe.add(groupeSelectionne);
         for(Seance seance: seances){
-            semaine.add(seance.getSemaine());
             find=false;
             for(String promo1: promo){
                 if (promo1.equals(seance.getPromo())){
@@ -60,5 +59,13 @@ public class RechercheEnseignant extends RechercheUser{
     @Override
     public ArrayList<String> getGroupe() {
         return groupe;
+    }
+
+    public void setPromoSelectionne(String promoSelectionne) {
+        this.promoSelectionne = promoSelectionne;
+    }
+
+    public void setGroupeSelectionne(String groupeSelectionne) {
+        this.groupeSelectionne = groupeSelectionne;
     }
 }
