@@ -9,6 +9,8 @@ import calendrier.modele.Enseignant;
 import calendrier.modele.Etudiant;
 import calendrier.modele.Utilisateur;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
@@ -76,9 +78,25 @@ public class Recherche extends JPanel{
         for (String cour: user.getRecherche().getCours()){
             recherche_cours.addItem(cour);
         }
+        recherche_cours.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                //si on sélectionne une autre valeur on l'affiche
+                user.getRecherche().setCoursSelectionne((String)recherche_cours.getSelectedItem());
+            }
+        });
         pan.add(cours);
         pan.add(recherche_cours);
-
+        for (Integer semaine: user.getRecherche().getSemaine()){
+            recherche_semaine.addItem(semaine);
+        }
+        recherche_semaine.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+                //si on sélectionne une autre valeur on l'affiche
+                user.getRecherche().setSemaineSelectionne((Integer)recherche_semaine.getSelectedItem());
+            }
+        });
+        pan_bis.add(semaine);
+        pan_bis.add(recherche_semaine);
         //recherche par ... non dispo pour ETUDIANT
         if (!(user instanceof Etudiant)){
             for (String promos: user.getRecherche().getPromo()){
@@ -98,9 +116,6 @@ public class Recherche extends JPanel{
                 recherche_année.addItem("ALL");
                 pan_bis.add(année);
                 pan_bis.add(recherche_année);
-                recherche_semaine.addItem("ALL");
-                pan_bis.add(semaine);
-                pan_bis.add(recherche_semaine);
                 pan_bis.add(mois);
             }
 

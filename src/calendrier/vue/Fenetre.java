@@ -278,7 +278,7 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener{
                 this.add(recap_content);
                 break;
             case 2: //affichage page ajout séance
-                ajout_seance = new Formulaire();
+                ajout_seance = new Formulaire(user);
                 this.add(ajout_seance);
                 break;   
             case 3: //affichage page reporting

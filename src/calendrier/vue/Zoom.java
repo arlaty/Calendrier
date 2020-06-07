@@ -181,6 +181,5 @@ public class Zoom extends JFrame{
         this.pack();
         this.setVisible(true);
         System.out.println("sort zoom");
-    
     }
 }

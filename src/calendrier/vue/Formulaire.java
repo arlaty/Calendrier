@@ -5,6 +5,7 @@
  */
 package calendrier.vue;
 
+import calendrier.modele.Utilisateur;
 import java.awt.BorderLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionEvent;
@@ -85,10 +86,9 @@ public class Formulaire extends JPanel{
      *  
      *
      * 
-     * @return 
+     * @param user 
      */
-    public  Formulaire(){
-        
+    public  Formulaire(Utilisateur user){
         //setBackground(Color.white);
         setLayout(new BorderLayout());
 
@@ -119,16 +119,17 @@ public class Formulaire extends JPanel{
    
         
         heure_début.setLabelFor(saisie_heure_début);
-        heure_fin.setLabelFor(saisie_heure_fin);
         saisie_heure_début.addItem("8h30");
-        saisie_heure_fin.addItem("10h00"); // ou deux checkbox après 1h30 et 3h + 15 min de pause
+        saisie_heure_début.addItem("10h15");
+        saisie_heure_début.addItem("12h");
+        saisie_heure_début.addItem("13h45");
+        saisie_heure_début.addItem("15h30");
+        saisie_heure_début.addItem("17h15");
+        saisie_heure_début.addItem("19h");
         pan_horaires.setLayout(new BoxLayout(pan_horaires, BoxLayout.LINE_AXIS));
         pan_horaires.add(horaires);
         pan_horaires.add(heure_début);
         pan_horaires.add(saisie_heure_début);
-        pan_horaires.add(heure_fin);
-        pan_horaires.add(saisie_heure_fin);
-    
         
         état.setLabelFor(saisie_état);
         saisie_état.addItem("Validé");
@@ -138,21 +139,24 @@ public class Formulaire extends JPanel{
         pan_état.add(état);
         pan_état.add(saisie_état);
            
-        //à remplir
-        saisie_cours.addItem("Mathématiques");
-        saisie_cours.addItem("Java POO");
         saisie_type_cours.addItem("CM");
         saisie_type_cours.addItem("TD");
         saisie_type_cours.addItem("TP");  
-        pan_cours.setLayout(new BoxLayout(pan_cours, BoxLayout.LINE_AXIS));        
+        saisie_type_cours.addItem("Projet");  
+        saisie_type_cours.addItem("Soutien");
+        pan_cours.setLayout(new BoxLayout(pan_cours, BoxLayout.LINE_AXIS));
+        for (String cours : user.getRecherche().getCours()){
+            saisie_cours.addItem(cours);
+        }
         pan_cours.add(cours);
         pan_cours.add(saisie_cours);
         pan_cours.add(type_cours);
         pan_cours.add(saisie_type_cours);
         
            
-        saisie_promo.addItem("ING1");
-        saisie_promo.addItem("ING2"); 
+        for (String promo : user.getRecherche().getPromo()){
+            saisie_cours.addItem(promo);
+        }
         pan_groupe.setLayout(new BoxLayout(pan_groupe, BoxLayout.LINE_AXIS));
         pan_groupe.add(promo);
         pan_groupe.add(saisie_promo);
