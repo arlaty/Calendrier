@@ -10,11 +10,17 @@ import calendrier.modele.RechercheEnseignant;
 import calendrier.modele.RechercheUser;
 import calendrier.modele.Utilisateur;
 import calendrier.vue.Recherche;
+import calendrier.modele.Reporting;
+import calendrier.modele.Seance;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 /**
  *
@@ -77,6 +83,41 @@ public class DAOFactory {
       } catch (SQLException e) {
         e.printStackTrace();
       }
+      Reporting t=new Reporting(user);
+      user.setReporting(t);
+      //Printf pour verifier implementatation de l'utilisateur et plus particulierement du reporting
+      System.out.println(user.getNom());
+      System.out.println(user.getPrenom());
+      System.out.println(user.getEmail());
+      
+      ArrayList<Seance>s=user.getSeances();
+      for(int i=0; i<s.size();i++)
+      {
+          Seance sa=s.get(i);
+          System.out.println(sa.getCours());
+      }
+      Reporting r=user.getReporting();
+      Map<String, Integer> m=r.getInfo1();
+      Map<String, Integer> y=r.getInfo3();
+      // Afficher le contenu du MAP
+    		Set listKeys=m.keySet();  // Obtenir la liste des clés
+    		Iterator iterateur=listKeys.iterator();
+    		// Parcourir les clés et afficher les entrées de chaque clé;
+    		while(iterateur.hasNext())
+    		{
+    			Object key= iterateur.next();
+    			System.out.println (key+"=>"+m.get(key));
+                     
+    		}
+                Set listKeyss=y.keySet();  // Obtenir la liste des clés
+    		Iterator Iterateur=listKeyss.iterator();
+    		// Parcourir les clés et afficher les entrées de chaque clé;
+    		while(Iterateur.hasNext())
+    		{
+    			Object key= Iterateur.next();
+    			System.out.println (key+"=>"+y.get(key));
+                     
+    		}
       return user;
     }
 
