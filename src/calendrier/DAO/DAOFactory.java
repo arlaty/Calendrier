@@ -5,7 +5,9 @@
  */
 package calendrier.DAO;
 
+import calendrier.modele.RechercheUser;
 import calendrier.modele.Utilisateur;
+import calendrier.vue.Recherche;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -60,6 +62,7 @@ public class DAOFactory {
             }
             SeanceDAO seanceDAO= new SeanceDAO(conn);
             user.setSeances(seanceDAO.findAll(result.getInt("id"), result.getInt("droit")));
+            user.setRecherche(new RechercheUser(user));
         }
       } catch (SQLException e) {
         e.printStackTrace();

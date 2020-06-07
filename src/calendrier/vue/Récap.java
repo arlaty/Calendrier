@@ -35,9 +35,9 @@ public class Récap extends JTabbedPane{
      * Constructeur qui instancie l'objet Récap qui correspond au content du récapitulatif des cours.
      *  
      *
+     * @param user
      */
     public Récap(Utilisateur user){
-        this.user=user;
         //new GridLayout( nbligne, nbcolonne) --> nb ligne en fonction du nombre de jour où il y a cours au max 5 par semaine
         this.setLayout(new GridLayout(2,1));
         
@@ -63,7 +63,7 @@ public class Récap extends JTabbedPane{
 		}
             }
 	});	
-        
+        this.user=user;
     }
     
     private void ajout_cours(){
@@ -133,7 +133,7 @@ public class Récap extends JTabbedPane{
                     ArrayList<Seance> seances= user.getSeances();
                     for(Seance seance: seances){
                         if (seance.getDate().equals(String.valueOf(tab.getValueAt(selectedRow,4)))){
-                            zoom_page = new Zoom(seance);
+                            zoom_page = new Zoom(seance,user);
                         }
                     }
 		}

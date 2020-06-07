@@ -35,34 +35,28 @@ public class EDT extends JPanel{
      * Constructeur qui instancie l'objet EDT qui correspond au contenu de l'emploi du temps
      *  
      *
+     * @param user
      */
     public EDT(Utilisateur user){
         //new GridLayout( nbligne, nbcolonne) --> nb ligne en fonction du nombre de jour où il y a cours au max 5 par semaine
         this.setLayout(new GridLayout(5,2));
         
-        Calendar calendar = Calendar.getInstance();
-        Date currentDate=new Date();
-        SimpleDateFormat formater= new SimpleDateFormat("E");
-        if (formater.format(currentDate).equals("sam.")){
-            calendar.add(calendar.DATE, -5);
-            ajout_jour(user,calendar.getTime());
-            calendar = Calendar.getInstance();
-            calendar.add(calendar.DATE, -4);
-            ajout_jour(user,calendar.getTime());
-            calendar = Calendar.getInstance();
-            calendar.add(calendar.DATE, -3);
-            ajout_jour(user,calendar.getTime());
-            calendar = Calendar.getInstance();
-            calendar.add(calendar.DATE, -2);
-            ajout_jour(user,calendar.getTime());
-            calendar = Calendar.getInstance();
-            calendar.add(calendar.DATE, -1);
-            ajout_jour(user,calendar.getTime());
-            calendar = Calendar.getInstance();
-            //ajout_jour(user,currentDate);
-            calendar.add(calendar.DATE, 1);
-            //ajout_jour(user,calendar.getTime());
-        }
+        Calendar calendar= Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        calendar.set(Calendar.WEEK_OF_YEAR, user.getRecherche().getSemaineSelectionne());
+        ajout_jour(user,calendar.getTime());
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
+        calendar.set(Calendar.WEEK_OF_YEAR, user.getRecherche().getSemaineSelectionne());
+        ajout_jour(user,calendar.getTime());
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
+        calendar.set(Calendar.WEEK_OF_YEAR, user.getRecherche().getSemaineSelectionne());
+        ajout_jour(user,calendar.getTime());
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
+        calendar.set(Calendar.WEEK_OF_YEAR, user.getRecherche().getSemaineSelectionne());
+        ajout_jour(user,calendar.getTime());
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
+        calendar.set(Calendar.WEEK_OF_YEAR, user.getRecherche().getSemaineSelectionne());
+        ajout_jour(user,calendar.getTime());
     }
     
     /**
@@ -80,33 +74,24 @@ public class EDT extends JPanel{
         int i=0;
         for(Seance seance: seances){
             if (formater.format(date).equals(formater.format(seance.getDate()))){
-                i++;
+                if (user.getRecherche().getCoursSelectionne().equals("ALL")) {
+                    i++;
+                } else if (user.getRecherche().getCoursSelectionne().equals(seance.getCours())){
+                    i++;
+                }
             }
         }
         Object[][] data = new Object[i][6];
         i=0;
         for(Seance seance: seances){
             if (formater.format(date).equals(formater.format(seance.getDate()))){
-                data[i][0]=seance.getHeure_debut().toString()+"-"+seance.getHeure_fin().toString();
-                data[i][1]=seance.getCours();
-                ArrayList<String> enseignants= seance.getEnseignants();
-                data[i][2]="";
-                for (String enseignant:enseignants){
-                    data[i][2]+=enseignant+" ";
+                if (user.getRecherche().getCoursSelectionne().equals("ALL")) {
+                    remplirLigne(data,seance,i);
+                    i++;
+                } else if (user.getRecherche().getCoursSelectionne().equals(seance.getCours())){
+                    remplirLigne(data,seance,i);
+                    i++;
                 }
-                data[i][3]=seance.getPromo()+" ";
-                ArrayList<String> groupes= seance.getGroupes();
-                for (String groupe:groupes){
-                    data[i][3]+=groupe+" ";
-                }
-                data[i][4]=seance.getSite()+" ";
-                ArrayList<String> salles= seance.getSalles();
-                for (String salle:salles){
-                    data[i][4]+=salle+" ";
-                }
-                data[i][4]+="("+String.valueOf(seance.getCapacite())+")";
-                data[i][5]=seance.getType_cours();
-                i++;
             }
         }
         formater= new SimpleDateFormat("EEEEEEEE");
@@ -134,11 +119,11 @@ public class EDT extends JPanel{
                     int selectedRow = tab.getSelectedRow();
                     System.out.print(tab.getSelectedRow());
                     System.out.print(tab.getSelectedColumn());
-                    zoom_page = new Zoom(seances.get(0));
+                    zoom_page = new Zoom(seances.get(0),user);
                     ArrayList<Seance> seances= user.getSeances();
                     for(Seance seance: seances){
                         if (seance.getDate().equals(String.valueOf(tab.getValueAt(selectedRow,4)))){
-                            zoom_page = new Zoom(seance);
+                            zoom_page = new Zoom(seance,user);
                         }
                     }
                     
@@ -151,6 +136,28 @@ public class EDT extends JPanel{
         this.add(new JScrollPane(tab));
         this.add(plus);
     
+    }
+    
+    private void remplirLigne(Object[][] data,Seance seance,int i){
+        data[i][0]=seance.getHeure_debut().toString()+"-"+seance.getHeure_fin().toString();
+        data[i][1]=seance.getCours();
+        ArrayList<String> enseignants= seance.getEnseignants();
+        data[i][2]="";
+        for (String enseignant:enseignants){
+            data[i][2]+=enseignant+" ";
+        }
+        data[i][3]=seance.getPromo()+" ";
+        ArrayList<String> groupes= seance.getGroupes();
+        for (String groupe:groupes){
+            data[i][3]+=groupe+" ";
+        }
+        data[i][4]=seance.getSite()+" ";
+        ArrayList<String> salles= seance.getSalles();
+        for (String salle:salles){
+            data[i][4]+=salle+" ";
+        }
+        data[i][4]+="("+String.valueOf(seance.getCapacite())+")";
+        data[i][5]=seance.getType_cours();
     }
   
 }

@@ -11,18 +11,12 @@ import java.util.ArrayList;
  *
  * @author alexi
  */
-public class RechercheEnseignant{
-    ArrayList<String> cours;
+public class RechercheEnseignant extends RechercheUser{
     ArrayList<String> promo;
     ArrayList<String> groupe;
 
-    public RechercheEnseignant() {
-    }
-
-    public RechercheEnseignant(ArrayList<String> cours, ArrayList<String> promo, ArrayList<String> groupe) {
-        this.cours = cours;
-        this.promo = promo;
-        this.groupe = groupe;
+    public RechercheEnseignant(Utilisateur user) {
+        super(user);
     }
 
     public ArrayList<String> getCours() {

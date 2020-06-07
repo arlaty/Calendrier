@@ -5,6 +5,7 @@
  */
 package calendrier.vue;
 
+import calendrier.modele.Admin;
 import calendrier.modele.Seance;
 import calendrier.modele.Utilisateur;
 import java.awt.Color;
@@ -76,7 +77,7 @@ public class Zoom extends JFrame{
      *  
      *
      */
-    public Zoom(Seance seance){
+    public Zoom(Seance seance,Utilisateur user){
         super("Zoom sur une séance");
         
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -153,9 +154,10 @@ public class Zoom extends JFrame{
         pan_site.add(salle);
         pan_site.add(seance_salle);
         
-        
-        pan_btn.add(btn_modifier);
-        pan_btn.add(btn_supprimer);
+        if (user instanceof Admin){
+            pan_btn.add(btn_modifier);
+            pan_btn.add(btn_supprimer);
+        }
         
         btn_modifier.addActionListener((ActionEvent arg0) -> { 
             //content formulaire prerempli avec les données de la séance 

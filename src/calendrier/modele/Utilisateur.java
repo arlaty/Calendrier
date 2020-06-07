@@ -17,6 +17,7 @@ public abstract class Utilisateur {
     String prenom;
     ArrayList<Seance> seances;
     Reporting reporting;
+    RechercheUser recherche;
 
     public Utilisateur() {}
 
@@ -26,7 +27,14 @@ public abstract class Utilisateur {
         this.prenom = prenom;
         this.seances = null;
         this.reporting = null;
+        this.recherche = null;
     }
+
+    public void setRecherche(RechercheUser recherche) {
+        this.recherche = recherche;
+    }
+    
+    
 
     public void setSeances(ArrayList<Seance> seances) {
         this.seances = seances;
@@ -51,6 +59,11 @@ public abstract class Utilisateur {
     public Reporting getReporting() {
         return reporting;
     }
+
+    public RechercheUser getRecherche() {
+        return recherche;
+    }
+    
     public abstract void createReporting();
     public abstract int getNumero();
     public abstract String getTD();
