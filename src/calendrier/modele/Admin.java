@@ -14,21 +14,42 @@ import java.util.ArrayList;
 public class Admin extends Utilisateur{
     RechercheComplet champs;
     
+    /**
+     *
+     */
     public Admin() {}
 
+    /**
+     *
+     * @param email
+     * @param nom
+     * @param prenom
+     */
     public Admin(String email, String nom, String prenom) {
         super(email, nom, prenom);
         this.champs = null;
     }
 
+    /**
+     *
+     * @return
+     */
     public RechercheComplet getChamps() {
         return champs;
     }
 
+    /**
+     *
+     * @param champs
+     */
     public void setChamps(RechercheComplet champs) {
         this.champs = champs;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int getNumero() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

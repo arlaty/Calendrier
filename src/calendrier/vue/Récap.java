@@ -106,7 +106,7 @@ public class Récap extends JTabbedPane{
             rowcount = result.getRow();
             result.beforeFirst(); // not rs.first() because the rs.next() below will move on, missing the first element
         }
-        Object[][] data = new Object[15][5];
+        Object[][] data = new Object[rowcount][5];
         int i=0;
         while (result.next()){
             ResultSet result2 = connect.createStatement(

@@ -44,7 +44,6 @@ public class Reporting extends JPanel{
         Map<String, Integer> dia3=repo.getInfo3();
         Map<String, Integer> dia4=repo.getInfo4();
         int t;
-        System.out.println("Page Reporting");
         panel = new JPanel(new GridLayout(2, 2));
         PieDataset data1=createData(dia1,user,1);
         PieDataset data2=createData(dia2,user,2);
