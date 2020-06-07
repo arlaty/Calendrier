@@ -5,9 +5,14 @@
  */
 package calendrier.vue;
 
+import calendrier.DAO.DAOFactory;
+import calendrier.modele.Utilisateur;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
 /**
@@ -24,6 +29,7 @@ public class Login extends JFrame implements ActionListener {
    private JButton validation = new JButton("Valider");
    private JLabel résultat = new JLabel(" ");
    public boolean OK= false;
+   private Utilisateur user= null;
 
    /**
      * Constructeur de la boite de dialogue de connexion à l'ouverture de l'application
@@ -88,20 +94,25 @@ public class Login extends JFrame implements ActionListener {
      */
    @Override
    public void actionPerformed(ActionEvent e) {
-       
-       /*if(verification(email, mdp)!=true) {
-           //On test dans la bdd email
-           //si email trouvé on test mdp
-           //si tout est bon
-           OK=true;
-           dispose();
-       } else {
-           //si email pas trouvé ou si mdp pas valide pour email trouvé alors message d'erreur
+       DAOFactory bdd = null;
+       try {
+           bdd= new DAOFactory();
+       } catch (ClassNotFoundException ex) {
+           Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+       } catch (SQLException ex) {
+           Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+       }
+       user=bdd.DAOUtilisateur(email.getText(),mdp.getText());
+       if (user==null){
            résultat.setText("Email ou mot de passe invalide");
-       }*/
-       OK=true;
-       résultat.setText("Email ou mot de passe invalide");
-       dispose();
-       
+       }
+       else{
+            OK=true;
+            dispose();
+        }
    }    
+
+    public Utilisateur getUser() {
+        return user;
+    }
 }
