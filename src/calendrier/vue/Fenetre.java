@@ -77,9 +77,9 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener{
             //System.out.println("1");
             //tant que le login n'est pas valider on affiche pas la fenêtre
         }
-        user=page.getUser();
-        barre();
         
+        barre();
+        user=page.getUser();
         recherche_form = new Recherche("Emploi du temps",user);
         edt_content = new EDT(user);
         this.add(recherche_form);

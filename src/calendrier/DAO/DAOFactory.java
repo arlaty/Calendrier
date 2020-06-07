@@ -5,6 +5,8 @@
  */
 package calendrier.DAO;
 
+import calendrier.modele.RechercheComplet;
+import calendrier.modele.RechercheEnseignant;
 import calendrier.modele.RechercheUser;
 import calendrier.modele.Utilisateur;
 import calendrier.vue.Recherche;
@@ -62,7 +64,15 @@ public class DAOFactory {
             }
             SeanceDAO seanceDAO= new SeanceDAO(conn);
             user.setSeances(seanceDAO.findAll(result.getInt("id"), result.getInt("droit")));
-            user.setRecherche(new RechercheUser(user));
+            if (result.getInt("droit")==4){
+                user.setRecherche(new RechercheUser(user));
+            }
+            else if (result.getInt("droit")==3){
+                user.setRecherche(new RechercheEnseignant(user));
+            }
+            else{
+                user.setRecherche(new RechercheComplet(user));
+            }
         }
       } catch (SQLException e) {
         e.printStackTrace();

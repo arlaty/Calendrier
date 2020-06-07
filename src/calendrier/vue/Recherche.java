@@ -81,10 +81,14 @@ public class Recherche extends JPanel{
 
         //recherche par ... non dispo pour ETUDIANT
         if (!(user instanceof Etudiant)){
-            recherche_promo.addItem("ALL");
+            for (String promos: user.getRecherche().getPromo()){
+                recherche_promo.addItem(promos);
+            }
             pan.add(promo);
             pan.add(recherche_promo);
-            recherche_groupe.addItem("ALL");
+            for (String groupes: user.getRecherche().getGroupe()){
+                recherche_groupe.addItem(groupes);
+            }
             pan.add(groupe);
             pan.add(recherche_groupe);
             recherche_utilisateur.addItem("ALL");
@@ -106,9 +110,9 @@ public class Recherche extends JPanel{
                 //etudiants.addActionListener(new StateListener());
                 //enseignants.addActionListener(new StateListener());
                 type_utilisateur.add(etudiants);
+                pan.add(etudiants);
                 type_utilisateur.add(enseignants);
                 pan.add(enseignants);
-                pan.add(etudiants);
             }
         }
 

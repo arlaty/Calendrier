@@ -112,21 +112,17 @@ public class EDT extends JPanel{
         tab.setModel(tableModel);
         tab.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	tab.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
- 
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if ( !e.getValueIsAdjusting() ) {
                     int selectedRow = tab.getSelectedRow();
-                    System.out.print(tab.getSelectedRow());
-                    System.out.print(tab.getSelectedColumn());
-                    zoom_page = new Zoom(seances.get(0),user);
+                    recupInfos(tab,selectedRow);
                     ArrayList<Seance> seances= user.getSeances();
                     for(Seance seance: seances){
-                        if (seance.getDate().equals(String.valueOf(tab.getValueAt(selectedRow,4)))){
+                        {
                             zoom_page = new Zoom(seance,user);
                         }
                     }
-                    
 		}
             }
 	});
@@ -135,7 +131,15 @@ public class EDT extends JPanel{
         //Sinon les titres des colonnes ne s'afficheront pas !
         this.add(new JScrollPane(tab));
         this.add(plus);
+    }
     
+    protected static void recupInfos(JTable table, int selectedRow) {
+        if ( selectedRow>=0 ) {
+            for(int i=0; i<table.getColumnCount(); i++) {
+                int column = table.convertColumnIndexToView(i); 
+                System.out.println(String.valueOf(table.getValueAt(selectedRow,column)));
+            }
+        }
     }
     
     private void remplirLigne(Object[][] data,Seance seance,int i){
