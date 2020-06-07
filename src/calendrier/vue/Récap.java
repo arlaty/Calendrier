@@ -68,16 +68,11 @@ public class Récap extends JTabbedPane{
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
                     int selectedRow = tab.getSelectedRow(); 
-<<<<<<< HEAD
-                    System.out.print("affiche int selectedRow dans recap " + selectedRow);
-                    affichageDetails();
-=======
                     try {
                         affichageDetails(String.valueOf(tab.getValueAt(selectedRow,0)));
                     } catch (SQLException ex) {
                         Logger.getLogger(Récap.class.getName()).log(Level.SEVERE, null, ex);
                     }
->>>>>>> b4822948f4ced6d6b38b33d39892f1b3a01a72b8
 		}
             }
 	});	
@@ -93,7 +88,7 @@ public class Récap extends JTabbedPane{
         String urlDatabase = "jdbc:mysql://localhost/calendrier";
         Connection connect=null;
         try {
-            connect = DriverManager.getConnection(urlDatabase, "root", "");
+            connect = DriverManager.getConnection(urlDatabase, "root", "root");
         } catch (SQLException ex) {
             Logger.getLogger(Récap.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -162,7 +157,7 @@ public class Récap extends JTabbedPane{
         String urlDatabase = "jdbc:mysql://localhost/calendrier";
         Connection connect=null;
         try {
-            connect = DriverManager.getConnection(urlDatabase, "root", "");
+            connect = DriverManager.getConnection(urlDatabase, "root", "root");
         } catch (SQLException ex) {
             Logger.getLogger(Récap.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -237,36 +232,23 @@ public class Récap extends JTabbedPane{
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if ( !e.getValueIsAdjusting() ) {
-<<<<<<< HEAD
-                    int selectedRow = tab.getSelectedRow();
-                    System.out.print("test affiche " +tab.getSelectedRow());
-                    System.out.print(tab.getSelectedColumn());
-                    ArrayList<Seance> seances= user.getSeances();
-                    /*for(Seance seance: seances){
-                        if (seance.getDate().equals(String.valueOf(tab.getValueAt(selectedRow,4)))){
-=======
                     int selectedRow = tab2.getSelectedRow();
-                    System.out.print(tab2.getSelectedRow());
-                    System.out.print(tab2.getSelectedColumn());
+                    System.out.print(tab.getSelectedRow());
+                    System.out.print(tab.getSelectedColumn());
                     ArrayList<Seance> seances= user.getSeances();
                     for(Seance seance: seances){
                         if (seance.getDate().equals(String.valueOf(tab2.getValueAt(selectedRow,4)))){
->>>>>>> b4822948f4ced6d6b38b33d39892f1b3a01a72b8
                             zoom_page = new Zoom(seance,user);
                         }
-                    }*/
+                    }
 		}
             }
 	});
         
         //Nous ajoutons notre tableau à notre contentPane dans un scroll
         //Sinon les titres des colonnes ne s'afficheront pas !
-<<<<<<< HEAD
-        details_page.add(new JScrollPane(tab));
-=======
-        details_pan.add(tab2);
->>>>>>> b4822948f4ced6d6b38b33d39892f1b3a01a72b8
-        
+
+        details_page.add(tab2);
         
         details_page.pack();
         details_page.setVisible(true);
