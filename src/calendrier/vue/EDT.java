@@ -42,13 +42,13 @@ public class EDT extends JPanel{
         this.setLayout(new GridLayout(5,2));
         
         Calendar calendar= Calendar.getInstance();
-        calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        /*calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
         calendar.set(Calendar.WEEK_OF_YEAR, user.getRecherche().getSemaineSelectionne());
-        ajout_jour(user,calendar.getTime());
+        ajout_jour(user,calendar.getTime());*/
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
         calendar.set(Calendar.WEEK_OF_YEAR, user.getRecherche().getSemaineSelectionne());
         ajout_jour(user,calendar.getTime());
-        calendar.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
+        /*calendar.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
         calendar.set(Calendar.WEEK_OF_YEAR, user.getRecherche().getSemaineSelectionne());
         ajout_jour(user,calendar.getTime());
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
@@ -56,7 +56,7 @@ public class EDT extends JPanel{
         ajout_jour(user,calendar.getTime());
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
         calendar.set(Calendar.WEEK_OF_YEAR, user.getRecherche().getSemaineSelectionne());
-        ajout_jour(user,calendar.getTime());
+        ajout_jour(user,calendar.getTime());*/
     }
     
     /**
@@ -116,6 +116,7 @@ public class EDT extends JPanel{
             public void valueChanged(ListSelectionEvent e) {
                 if ( !e.getValueIsAdjusting() ) {
                     int selectedRow = tab.getSelectedRow();
+                    System.out.print("\n affiche int selectedRow dans edt " + selectedRow);
                     recupInfos(tab,selectedRow);
                     ArrayList<Seance> seances= user.getSeances();
                     for(Seance seance: seances){
@@ -137,6 +138,7 @@ public class EDT extends JPanel{
         if ( selectedRow>=0 ) {
             for(int i=0; i<table.getColumnCount(); i++) {
                 int column = table.convertColumnIndexToView(i); 
+                System.out.println(i);
                 System.out.println(String.valueOf(table.getValueAt(selectedRow,column)));
             }
         }
