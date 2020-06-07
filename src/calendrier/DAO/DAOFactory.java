@@ -25,7 +25,7 @@ public class DAOFactory {
         String urlDatabase = "jdbc:mysql://localhost/calendrier";
        // String urlDatabase = "jdbc:mysql://localhost:3308/jps?characterEncoding=latin1";
         //création d'une connexion JDBC à la base 
-        conn = DriverManager.getConnection(urlDatabase, "root", "");
+        conn = DriverManager.getConnection(urlDatabase, "root", "root");
     }
    
     /**

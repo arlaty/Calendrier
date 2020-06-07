@@ -131,11 +131,11 @@ public class Récap extends JTabbedPane{
                     System.out.print(tab.getSelectedRow());
                     System.out.print(tab.getSelectedColumn());
                     ArrayList<Seance> seances= user.getSeances();
-                    for(Seance seance: seances){
+                    /*for(Seance seance: seances){
                         if (seance.getDate().equals(String.valueOf(tab.getValueAt(selectedRow,4)))){
                             zoom_page = new Zoom(seance);
                         }
-                    }
+                    }*/
 		}
             }
  
