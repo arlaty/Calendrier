@@ -78,5 +78,10 @@ public class DAOFactory {
         e.printStackTrace();
       }
       return user;
-    }  
+    }
+
+    public static Connection getConn() {
+        return conn;
+    }
+    
 }

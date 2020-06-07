@@ -11,6 +11,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -77,9 +81,8 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener{
             //System.out.println("1");
             //tant que le login n'est pas valider on affiche pas la fenêtre
         }
-        
-        barre();
         user=page.getUser();
+        barre();
         recherche_form = new Recherche("Emploi du temps",user);
         edt_content = new EDT(user);
         this.add(recherche_form);
@@ -99,8 +102,11 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener{
         pan.setBackground(new Color(113, 171, 219));
         BoxLayout    bl=new BoxLayout(pan,BoxLayout.Y_AXIS);   //layoutManager
         pan.setLayout(bl);                      //attache le layoutManager au panel           
-
-        JLabel  lab=new JLabel("Planning 2019-2020  -Nom Prénom (type d'utilisateur)", JLabel.RIGHT);  //créé un label
+        
+        String typeUser=user.getClass().getTypeName();
+        String[] partString= typeUser.split("\\.");
+        typeUser=partString[2];
+        JLabel  lab=new JLabel("Planning 2019-2020  -"+user.getNom()+" "+user.getPrenom()+" ("+typeUser+")", JLabel.RIGHT);  //créé un label
         lab.setForeground(Color.white);
         
         pan.add(lab); //l'ajoute au panel
@@ -118,21 +124,32 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener{
      *  
      *
      */
-    public void affichageSalles(){
-        System.out.println("Page Salles IN");
+    public void affichageSalles() throws ClassNotFoundException, SQLException{
         //Les données du tableau qui seront à chercher depuis la BDD
-        Object[][] data = {
-            {"E1", "EM009"},
-            {"E2", "P445"},
-            {"E3", "C102"}
-        };
-
+        Class.forName("com.mysql.jdbc.Driver");
+        String urlDatabase = "jdbc:mysql://localhost/calendrier";
+        Connection connect = DriverManager.getConnection(urlDatabase, "root", "");
+        ResultSet result4 = connect.createStatement(
+        ResultSet.TYPE_SCROLL_INSENSITIVE,
+        ResultSet.CONCUR_READ_ONLY)
+        .executeQuery("SELECT * FROM salle INNER JOIN site ON salle.Id_site=site.id");
+        int rowcount =0;
+        if (result4.last()) {
+            rowcount = result4.getRow();
+            result4.beforeFirst(); // not rs.first() because the rs.next() below will move on, missing the first element
+        }
+        Object[][] data = new Object[rowcount][2];
+        int i=0;
+        while (result4.next()){
+            data[i][0]=result4.getString("site.nom");
+            data[i][1]=result4.getString("salle.nom");
+            i++;
+        }
         //Les titres des colonnes
         Object  title[] = {"Site", "Salle"};
         JTable tableau = new JTable(data, title);
         //instance table model
         DefaultTableModel tableModel = new DefaultTableModel(data, title) {
-
             @Override
             public boolean isCellEditable(int row, int column) {
                //all cells false
@@ -143,8 +160,6 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener{
         //Nous ajoutons notre tableau à notre contentPane dans un scroll
         //Sinon les titres des colonnes ne s'afficheront pas !
         this.add(new JScrollPane(tableau));
-        System.out.println("Page Salles OUT");
-
     }
     
     /**
@@ -257,9 +272,9 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener{
                 this.add(edt_content);
                 break;
             case 1: //affichage page recap cours
-                recherche_form = new Recherche("Récapitulatif des cours",user);
+                //recherche_form = new Recherche("Récapitulatif des cours",user);
                 recap_content = new Récap(user);
-                this.add("North", recherche_form);
+                //this.add("North", recherche_form);
                 this.add(recap_content);
                 break;
             case 2: //affichage page ajout séance
@@ -273,7 +288,11 @@ public class Fenetre extends JFrame implements ActionListener, ItemListener{
                 break;
             case 4: //affichage page salles
                 System.out.println("Demande affichage salles");
-                affichageSalles();
+                try{
+                    affichageSalles();
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
                 break;
         }
         
